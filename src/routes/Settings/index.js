@@ -3,12 +3,13 @@
  */
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';
-import { Paper, Container, Box, Grid, Button, Input, Icon } from '@material-ui/core';
+import { Paper, Container, Box, Grid, Button, Input } from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
 import 'video-react/dist/video-react.css';
 import { Player } from 'video-react';
-import { CustomCard, HulkPageLoader } from 'components/GlobalComponents';
+import { CustomCard } from 'components/GlobalComponents';
 import { userService } from "../../_services";
+import { NotificationManager } from 'react-notifications';
 
 const styles = theme => ({
 	Paper: {
@@ -27,7 +28,8 @@ const styles = theme => ({
 class Settings extends Component {
 	state = {
 		introductionVideo: null,
-		verify_sms: null
+		verify_sms: null,
+		introduction_video_file: null
 	}
 	componentDidMount() {
 		this.getData();
@@ -37,8 +39,8 @@ class Settings extends Component {
 			.then(res => {
 				if (res.success) {
 					const config = res.config;
-					const introductionVideo = config.find(item => item.key == "introduction").value;
-					const verify_sms = config.find(item => item.key == "verify_sms").value;
+					const introductionVideo = config.find(item => item.key === "introduction").value;
+					const verify_sms = config.find(item => item.key === "verify_sms").value;
 					this.setState({
 						introductionVideo,
 						verify_sms
@@ -49,9 +51,47 @@ class Settings extends Component {
 				console.log(err);
 			})
 	}
+	uploadVideo(e) {
+		this.setState({ introduction_video_file: e.target.files[0] });
+	}
+	saveSMS() {
+		let { verify_sms } = this.state;
+		if (!verify_sms?.includes("{code}")) {
+			NotificationManager.error("Verification sms text must be contains '{code}'");
+			return;
+		}
+		userService.changeConfig({ verify_sms })
+			.then(res => {
+				if (res.success === true) {
+					NotificationManager.success("Successfully updated the verification sms");
+				}
+			})
+			.catch(err => {
+				NotificationManager.error("Something went wrong");
+				console.log(err);
+			})
+	}
+	change_video() {
+		const { introduction_video_file } = this.state;
+		if (!introduction_video_file) {
+			document.getElementById("introduction_video").click();
+		} else {
+			
+			const data = new FormData() 
+			data.append('file', introduction_video_file)
+
+			userService.uploadFile(introduction_video_file)
+				.then(res => {
+					console.log(res);
+				})
+				.catch(err => {
+					console.log(err);
+				})
+		}
+	}
 	render() {
 		const { classes } = this.props;
-		const { introductionVideo, verify_sms } = this.state;
+		const { introductionVideo, verify_sms, introduction_video_file } = this.state;
 		return (
 			<div className="new-dashboard">
 				<Container maxWidth="lg">
@@ -71,24 +111,21 @@ class Settings extends Component {
 										<input
 											accept="video/*"
 											className={classes.input}
-											id="contained-button-file"
 											type="file"
+											id="introduction_video"
 											hidden
+											onChange={this.uploadVideo.bind(this)}
 										/>
-										<label htmlFor="contained-button-file">
-											<Button variant="contained" color="primary" component="span"> Upload Video </Button>
-										</label>
+										<Button variant="contained" color="primary" component="span" onClick={this.change_video.bind(this)}> {introduction_video_file ? `Upload file (${introduction_video_file.name})` : "Choose Video"} </Button>
 										{introductionVideo &&
-											<Button variant="contained" color="secondary" component="span" style={{ marginLeft: 20 }}>
-												<Icon>trash</Icon>
-											Delete </Button>
+											<Button variant="contained" color="secondary" component="span" style={{ marginLeft: 20 }}> Delete </Button>
 										}
 									</CustomCard>
 								</Grid>
 								<Grid item xs={12} sm={6} md={4}>
 									<CustomCard title={"SMS to verification"} showDivider={true}>
-										<Input rows={5} multiline fullWidth value={verify_sms} />{'*{code}'}<br /><br />
-										<Button variant="contained" color="primary" component="span"> Save</Button>
+										<Input rows={5} multiline fullWidth value={verify_sms} onChange={(text) => this.setState({ verify_sms: text.target.value })} />{'*{code}'}<br /><br />
+										<Button variant="contained" color="primary" component="span" onClick={this.saveSMS.bind(this)}> Save</Button>
 									</CustomCard>
 								</Grid>
 							</Grid>

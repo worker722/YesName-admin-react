@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import clsx from 'clsx';
-import { AppBar, Toolbar, Tooltip, IconButton, Box, Hidden, Icon, Switch, FormControlLabel } from '@material-ui/core';
+import { AppBar, Toolbar, Tooltip, IconButton, Box, Hidden, Icon } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import HorizontalMenu from 'components/HorizontalMenu/HorizontalMenu.js'
 
@@ -206,11 +206,10 @@ class Header extends Component {
 							</Box>
 						</Box>
 						<Box className="horizontal-icon" display="flex" alignItems="center">
-							<Box className="h-btn-noti res-hide">
-								<FormControlLabel
-									control={<Switch color="primary" checked={isDarkModeActive} onChange={() => { darkModeAction(!isDarkModeActive) }} />}
-									label="Dark Mode"
-								/>
+							<Box className="h-btn-noti res-hide" >
+								<IconButton onClick={(e) => darkModeAction(!isDarkModeActive)} variant="contained" color="primary" style={{ padding: '6px' }}>
+									<Icon className={classes.textLight} style={{ transform: 'scale(0.9)' }}>{isDarkModeActive ? "light_mode" : "dark_mode"}</Icon>
+								</IconButton>
 							</Box>
 							<Box className="h-btn-noti res-hide">
 								<Notification iconColor={classes.textLight} />
