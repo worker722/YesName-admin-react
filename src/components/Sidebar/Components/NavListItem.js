@@ -131,7 +131,7 @@ class NavListItem extends Component {
 
       const { menu, toggleMenu, toggleFourthMenu, toggleThirdMenu, toggleThirdMenuAndCloseSidebar } = this.props;
 		// Child Route is not null and full page menu is false
-		if (menu.child_routes !== null && menu.fullPageMenu === false) {
+		if (menu.child_routes !== null) {
          return (
             <li>
                <ListItem
@@ -200,9 +200,9 @@ class NavListItem extends Component {
 						className={clsx(classes.textWhite, { [classes.menuOpen]: menu.isMenuOpen,})}
 					>
                   <List component="ul" className="sub-menu">
-                     {menu.child_routes.map((subMenu, index) => {
+                     {menu.child_routes && menu.child_routes.map((subMenu, index) => {
 								// Third child route is not null
-								if (subMenu.third_child_routes !== null && subMenu.fullPageMenu === false){
+								if (subMenu.third_child_routes !== null){
 										return(
 											<li key={index}>
 												<ListItem

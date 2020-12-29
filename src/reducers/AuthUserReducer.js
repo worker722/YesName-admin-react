@@ -4,9 +4,6 @@ import {
 	LOGIN_USER_FAILURE,
 	LOGIN_EMAIL_CHANGED,
 	LOGIN_PASSWORD_CHANGED,
-	SIGNUP_USER,
-	SIGNUP_USER_SUCCESS,
-	SIGNUP_USER_FAILURE,
 	LOGOUT_USER
 } from 'actions/Types'
 
@@ -14,10 +11,10 @@ import {
  * Initial auth user
  */
 const INIT_STATE = {
-	user: localStorage.getItem("user_id"),
+	user: JSON.parse(localStorage.getItem("user")),
 	loading: false,
-	email: 'hulktestuser@hulk.com',
-	password: '12345678',
+	email: 'yesname@admin.com',
+	password: 'secret',
 	error: ''
 }
 
@@ -37,15 +34,6 @@ export default (state = INIT_STATE, action) => {
 
 		case LOGIN_PASSWORD_CHANGED:
 			return { ...state, password: action.payload };
-
-		case SIGNUP_USER:
-			return { ...state, loading: true };
-
-		case SIGNUP_USER_SUCCESS:
-			return { ...state, loading: false, user: action.payload };
-
-		case SIGNUP_USER_FAILURE:
-			return { ...state, loading: false, error: action.payload };
 
 		case LOGOUT_USER:
 			return { ...state, user: null }

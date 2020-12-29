@@ -2,21 +2,17 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TextField, Button, Fab, Box, Typography, Divider } from "@material-ui/core";
+import { TextField, Button, Box, Typography } from "@material-ui/core";
 import { CustomCard } from 'components/GlobalComponents';
 
 // redux action
 import {
-	signinUserWithFirebase,
+	signinUser,
 	onEmailChanged,
 	onPasswordChanged,
-	signinUserWithGoogle,
-	signinUserWithFacebook,
-	signinUserWithTwitter,
-	signinUserWithGithub
 } from 'actions';
 
-class SigninFirebase extends Component {
+class Signin extends Component {
 	//constructor
 	constructor(props) {
 		super(props);
@@ -29,7 +25,7 @@ class SigninFirebase extends Component {
 		}
 	}
 	/**
-	 * Function to login user using Firebase
+	 * Function to login user
 	 */
 	async onUserLogin() {
 		const { email, password } = this.props;
@@ -42,7 +38,7 @@ class SigninFirebase extends Component {
 		})
 		if (email !== '' && password !== '') {
 			var userDetails = { email, password }
-			this.props.signinUserWithFirebase(userDetails, this.props.history);
+			this.props.signinUser(userDetails, this.props.history);
 		}
 	}
 
@@ -88,16 +84,6 @@ class SigninFirebase extends Component {
 		}
 	}
 
-	/**
-	 * On User Sign Up
-	 */
-	onUserSignUp() {
-		this.props.history.push('/signup');
-	}
-	onForgotPassword() {
-		this.props.history.push('/forgot-password');
-	}
-
 	render() {
 		const { blankEmail, blankPassword, invalidEmail } = this.state.formErrors;
 		const { email, password, error, isDarkModeActive } = this.props;
@@ -116,7 +102,7 @@ class SigninFirebase extends Component {
 							<CustomCard>
 								<form className="login-form text-center">
 									<Typography variant="subtitle2" >Log in to continue to :</Typography>
-									<Typography variant="subtitle2" color="textPrimary" className="fw-500">Hulk</Typography>
+									<Typography variant="subtitle2" color="textPrimary" className="fw-500">YesName</Typography>
 									<Box my={3}>
 										<TextField
 											required
@@ -166,40 +152,6 @@ class SigninFirebase extends Component {
 											Sign In
 										</Button>
 									</Box>
-									<Typography variant="subtitle2">Sign in with</Typography>
-									<div className="social-login-wrapper">
-										<div className="social-list">
-											<Fab size="small" variant="round" className="text-white facebook-color"
-												onClick={() => this.props.signinUserWithFacebook(this.props.history)}
-											>
-												<i className="fab fa-facebook-f"></i>
-											</Fab>
-											<Fab size="small" variant="round" className="text-white google-color"
-												onClick={() => this.props.signinUserWithGoogle(this.props.history)}
-											>
-												<i className="fab fa-google-plus-g"></i>
-											</Fab>
-											<Fab size="small" variant="round" className="text-white twitter-color"
-												onClick={() => this.props.signinUserWithTwitter(this.props.history)}
-											>
-												<i className="fab fa-twitter"></i>
-											</Fab>
-											<Fab size="small" className="text-white github-color"
-												onClick={() => this.props.signinUserWithGithub(this.props.history)}
-											>
-												<i className="fab fa-github-alt"></i>
-											</Fab>
-										</div>
-									</div>
-									<Divider></Divider>
-									<Box display="flex" justifyContent="center" alignItems="center" pt={2}>
-										<Box fontSize="subtitle2.fontSize" className="border-right" pr={1}>
-											<Box style={{ cursor: 'pointer' }} color="primary.main" onClick={() => this.onForgotPassword()}>Can't log in ?</Box>
-										</Box>
-										<Box fontSize="subtitle2.fontSize" pl={1}>
-											<Box style={{ cursor: 'pointer' }} color="primary.main" onClick={() => this.onUserSignUp()}>Sign up for an account</Box>
-										</Box>
-									</Box>
 								</form>
 							</CustomCard>
 						</Box>
@@ -217,11 +169,7 @@ const mapStateToProps = ({ authUser, settings }) => {
 };
 
 export default connect(mapStateToProps, {
-	signinUserWithFirebase,
+	signinUser,
 	onEmailChanged,
 	onPasswordChanged,
-	signinUserWithGoogle,
-	signinUserWithFacebook,
-	signinUserWithTwitter,
-	signinUserWithGithub
-})(SigninFirebase);
+})(Signin);

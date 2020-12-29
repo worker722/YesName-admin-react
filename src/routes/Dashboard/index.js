@@ -1,22 +1,44 @@
 /**
- * Courses Routing File
+ * Ecommerce Dashboard 
  */
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/styles';
+import { Paper, Container, Box } from '@material-ui/core';
+import DynamicDataChart from 'components/Widgets/DynamicDataChart';
+import { withTheme } from '@material-ui/core/styles';
 
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import {
-	AsyncDashboard1Component,
-   AsyncFullPageUrlsComponent,
-   AsyncDashboard2Component,
-   AsyncDashboard3Component
-} from 'components/AsyncComponent/AsyncComponent';
+const styles = theme => ({
+	Paper: {
+		padding: '0.75rem',
+		backgroundColor: 'transparent',
+		boxShadow: 'none',
+		'&:first-child': {
+			paddingTop: '24px',
+		},
+		'&:last-child': {
+			paddingBottom: '30px',
+		}
+	},
+	pad0: {
+		padding: 0
+	}
+});
 
-const Dashboard = ({ match }) => (
-	<Switch>  
-		<Route path={`${match.url}/dashboard1`} component={AsyncDashboard1Component}></Route>		
-		<Route path={`${match.url}/dashboard2`} component={AsyncDashboard2Component}></Route>
-      <Route path={`${match.url}/dashboard3`} component={AsyncDashboard3Component}></Route>
-      <Route path={`${match.url}/`} component={AsyncFullPageUrlsComponent}></Route>
-	</Switch>
-)
-export default Dashboard;
+class Dashboard extends Component {
+	render() {
+		const { classes } = this.props;
+		return (
+			<div className="new-dashboard">
+				<Container maxWidth="lg">
+					<Box pt={3}>
+						<Paper className={classes.Paper} square >
+							<DynamicDataChart />
+						</Paper>
+					</Box>
+				</Container>
+			</div>
+		);
+	}
+}
+
+export default withStyles(styles)(withTheme(Dashboard));

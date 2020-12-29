@@ -38,36 +38,12 @@ const INITIAL_STATE = {
          name: 'French',
          icon: 'france.png',
       },
-      {
-         languageId: 'saudi-arabia',
-         locale: 'ar',
-         name: 'Arabic',
-         icon: 'saudi-arabia.png',
-      },
-      {
-         languageId: 'spanish',
-         locale: 'es',
-         name: 'Spanish',
-         icon: 'spain.png',
-      },
-      {
-         languageId: 'korean',
-         locale: 'ko',
-         name: 'Korean',
-         icon: 'korean.png',
-      },
-      {
-         languageId: 'japanese',
-         locale: 'ja',
-         name: 'Japanese',
-         icon: 'japanese.png',
-      },
-      {
-         languageId: 'chinese',
-         locale: 'zh',
-         name: 'Chinese',
-         icon: 'chinese.png',
-      }
+      // {
+      //    languageId: 'germany',
+      //    locale: 'gm',
+      //    name: 'GerMany',
+      //    icon: 'germany.png',
+      // },
 	],
 	notificationSidebar: false
 }

@@ -2,80 +2,27 @@
 	"data": [
 		{
 			"menu_title": "sidebar.dashboard",
-			"path": "/app/dashboard/",
+			"path": "/app/dashboard",
 			"icon": "dashboard",
-			"category":"general",
-         "isMenuOpen": true,
-         "menu":"dashboard",
-         "fullPageMenu": false,
+			"category": "general",
+			"menu": "dashboard",
+			"fullPageMenu": false,
+			"isMenuOpen": true,
 			"desc": true,
-			"content": "",
-			"child_routes": [
-				{
-					"path": "/app/dashboard/dashboard1",
-					"menu_title": "sidebar.dashboard1",
-               "icon": "equalizer",
-					"fullPageMenu": false,
-					"isMenuOpen": false,
-					"third_child_routes": null
-				},
-				{
-					"path": "/app/dashboard/dashboard2",
-					"menu_title": "sidebar.dashboard2",
-               "icon": "dashboard",
-               "fullPageMenu": false,
-               "isMenuOpen": false,
-					"third_child_routes": null
-            },
-            {
-               "path": "/app/dashboard/dashboard3",
-               "menu_title": "sidebar.dashboard3",
-               "icon": "ballot",
-               "fullPageMenu": false,
-               "isMenuOpen": false,
-               "third_child_routes": null
-            }
-			]
+			"content": "Dashboard",
+			"child_routes": null
 		},
 		{
-			"menu_title": "sidebar.fullpagemenu",
-			"path": "/app/fullpagemenu",
-			"icon": "label",
-			"category":"general",
-         "menu":"fullpagemenu",
-         "isMenuOpen":false,
-			"fullPageMenu": true,
-			"desc":true,
-			"content":"Lorem ipsum dolor sit amet",
-			"child_routes": [
-				{
-					"path": "/app/dashboard/dashboard1",
-					"menu_title": "sidebar.dashboard1",
-					"icon": "equalizer",
-					"f_desc":"View dashboard and Widgets replated to web analytics",
-               "isMenuOpen":false,
-               "fullPageMenu": false,
-					"third_child_routes":null
-				},
-				{
-					"path": "/app/dashboard/dashboard2",
-					"menu_title": "sidebar.dashboard2",
-					"icon": "dashboard",
-					"f_desc":"Checkout the SAAS dashboard and Widgets like chat and Task List",
-               "isMenuOpen":false,
-               "fullPageMenu": false,
-					"third_child_routes":null
-				},
-				{
-					"path": "/app/dashboard/dashboard3",
-					"menu_title": "sidebar.dashboard3",
-					"icon": "ballot",
-					"f_desc":"Manage your eCommerce dashboard and check out other activities",
-               "isMenuOpen":false,
-               "fullPageMenu": false,
-					"third_child_routes":null
-				}
-			]
-		}		
+			"menu_title": "sidebar.settings",
+			"path": "/app/settings",
+			"icon": "settings",
+			"category": "general",
+			"menu": "settings",
+			"fullPageMenu": false,
+			"isMenuOpen": true,
+			"desc": true,
+			"content": "App default Settings",
+			"child_routes": null
+		}
 	]
 }

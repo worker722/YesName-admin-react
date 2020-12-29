@@ -2,15 +2,14 @@
  * Router service file
 */
 import Dashboard from 'routes/Dashboard'
-import FullPageMenu from 'routes/FullPageMenu'
-
+import Settings from 'routes/Settings'
 export default [
-   {
-      path: 'fullpagemenu',
-      component: FullPageMenu
-   },
 	{
 		path: 'dashboard',
 		component: Dashboard
+	},
+	{
+		path: 'settings',
+		component: Settings
 	}
 ]

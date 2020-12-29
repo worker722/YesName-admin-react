@@ -10,9 +10,6 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 // App Conatiner
 import App from './container/App';
 
-// Firebase
-import './firebase';
-
 // Hulk CSS
 import './lib/hulkCss';
 

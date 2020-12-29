@@ -1,5 +1,6 @@
 export default {
    "sidebar.dashboard": "Tableau de bord",
+   "sidebar.settings": "Settings",
    "sidebar.dashboard1": "Tableau de bord 1",
    "sidebar.dashboard2": "Tableau de bord 2",
    "sidebar.dashboard3": "Tableau de bord 3",

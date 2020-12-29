@@ -4,21 +4,18 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import clsx from 'clsx';
-import { AppBar, Toolbar, Tooltip, IconButton, Box, Hidden, TextField, Icon } from '@material-ui/core';
+import { AppBar, Toolbar, Tooltip, IconButton, Box, Hidden, Icon, Switch, FormControlLabel } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import HorizontalMenu from 'components/HorizontalMenu/HorizontalMenu.js'
 
 //component
 import FullScreen from './Components/FullScreen';
-import Cart from './Components/Cart';
-import Wishlist from './Components/Wishlist';
 import Notification from './Components/Notifications';
-import ChatSidebar from './Components/ChatSidebar';
 import LanguageProvider from './Components/LanguageProvider'
 import HeaderUserBlock from './Components/HeaderUserBlock';
-import MegaMenu from './Components/MegaMenu';
 
 import GlobalSearch from 'components/GlobalComponents/GlobalSearch'
+import { darkModeAction } from 'actions';
 
 const drawerWidth = 260;
 
@@ -59,7 +56,7 @@ const styles = theme => ({
 	},
 	ToggleBtn: {
 		marginLeft: '-12px',
-		color:theme.palette.text.primary,
+		color: theme.palette.text.primary,
 		transition: theme.transitions.create(['margin'], {
 			easing: theme.transitions.easing.easeOut,
 			duration: theme.transitions.duration.enteringScreen,
@@ -138,7 +135,7 @@ class Header extends Component {
 	}
 
 	render() {
-		const { toggleSidebar, open, toggleResponsiveSidebar, openHorizontal } = this.props;
+		const { toggleSidebar, open, toggleResponsiveSidebar, openHorizontal, settings: { isDarkModeActive }, darkModeAction } = this.props;
 		const { classes } = this.props;
 		const { windowWidth, isSearch } = this.state;
 		return (
@@ -149,14 +146,14 @@ class Header extends Component {
 					className={clsx(classes.appBar, {
 						[classes.appBarShift]: windowWidth < 1280 ? false : open,
 						[classes.horizontalHead]: openHorizontal,
-						[`rtl-header`]:!open,
+						[`rtl-header`]: !open,
 					})}
 				>
 					<Box>
-						<GlobalSearch 
-							showSearchBar={() => this.showSearchBar()} 
-							className={clsx(classes.searchBar, 
-							{ [classes.activeBar]: isSearch, }, 'search-bar-wrap')}
+						<GlobalSearch
+							showSearchBar={() => this.showSearchBar()}
+							className={clsx(classes.searchBar,
+								{ [classes.activeBar]: isSearch, }, 'search-bar-wrap')}
 						/>
 					</Box>
 					<Toolbar className={classes.contentJustify}>
@@ -170,7 +167,7 @@ class Header extends Component {
 										edge="start"
 										className={clsx(classes.menuButton, {
 											[classes.ToggleBtn]: open === false,
-										},'hamburger-icon')}
+										}, 'hamburger-icon')}
 									>
 										<MenuIcon />
 									</IconButton>
@@ -192,7 +189,7 @@ class Header extends Component {
 							{openHorizontal ?
 								<div>
 									<Box className="logo-wrap" bgcolor="primary.main" mr={2} py="19px" px={4} lineHeight={0.8}>
-										<Box component={Link} to="/app/dashboard/dashboard1" display="inline-block" lineHeight={0.8}>
+										<Box component={Link} to="/" display="inline-block" lineHeight={0.8}>
 											<img src={require('assets/Images/hulk-light.png')} alt="site-logo" width="95" height="25" />
 										</Box>
 									</Box>
@@ -207,29 +204,20 @@ class Header extends Component {
 									</IconButton>
 								</Tooltip>
 							</Box>
-							{!openHorizontal ?
-								<Hidden smDown implementation="css">
-									<Box pl={2} className="mega-menu-wrap">
-										<MegaMenu iconColor={classes.textLight} />
-									</Box>
-								</Hidden>
-								:
-								null
-							}
 						</Box>
 						<Box className="horizontal-icon" display="flex" alignItems="center">
 							<Box className="h-btn-noti res-hide">
+								<FormControlLabel
+									control={<Switch color="primary" checked={isDarkModeActive} onChange={() => { darkModeAction(!isDarkModeActive) }} />}
+									label="Dark Mode"
+								/>
+							</Box>
+							<Box className="h-btn-noti res-hide">
 								<Notification iconColor={classes.textLight} />
 							</Box>
-                     <Box px="10px" className="h-btn-lang">
-                        <LanguageProvider></LanguageProvider>
-                     </Box>  
-							<Box className="h-btn-cart res-hide">
-								<Cart iconColor={classes.textLight} />
+							<Box px="10px" className="h-btn-lang">
+								<LanguageProvider></LanguageProvider>
 							</Box>
-							{/* <Box>
-								<Wishlist iconColor={classes.textLight} />
-							</Box> */}
 							<Hidden xsDown implementation="css" className="h-btn-full-scr res-hide">
 								<Box>
 									<FullScreen iconColor={classes.textLight} />
@@ -256,5 +244,5 @@ class Header extends Component {
 const mapStateToProps = ({ settings }) => {
 	return { settings }
 }
-
-export default withRouter(connect(mapStateToProps, {})(withStyles(styles)(Header)));
+// 
+export default withRouter(connect(mapStateToProps, { darkModeAction })(withStyles(styles)(Header)));

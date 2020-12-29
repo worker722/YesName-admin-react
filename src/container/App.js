@@ -9,14 +9,7 @@ import { NotificationContainer } from 'react-notifications';
 import { CssBaseline } from '@material-ui/core';
 
 // APP signin and signup imports
-import AppSignin from './Signin/SigninFirebase';
-import AppSignup from './Signup/SignupFirebase';
-import AppForgotPassword from './ForgotPassword/ForgotPassword';
-import Login from './Login';
-import Register from './Register';
-import ForgotPassword2 from './ForgotPassword2';
-
-// deafult layout
+import AppSignin from './Signin';
 import DefaultLayout from './DefaultLayout'
 
 
@@ -44,7 +37,7 @@ class App extends Component {
 			if (user === null) {
 				return (<Redirect to="/signin" />);
 			} else {
-				return (<Redirect to="/app/dashboard/dashboard1" />);
+				return (<Redirect to="/app/dashboard" />);
 			}
 		}
 		return (
@@ -57,11 +50,6 @@ class App extends Component {
 					component={DefaultLayout}
 				/>
 				<Route path="/signin" component={AppSignin} />
-				<Route path="/signup" component={AppSignup} />
-				<Route path="/forgot-password" component={AppForgotPassword} />
-				<Route path="/login" component={Login} />
-				<Route path="/register" component={Register} />
-				<Route path="/forgot-password2" component={ForgotPassword2} />
          </HulkThemeProvider>
 		);
 	}

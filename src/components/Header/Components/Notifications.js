@@ -2,8 +2,7 @@
  * Notification Component
  */
 import React, { Fragment } from 'react';
-import { makeStyles, Divider, Icon, IconButton, List, ListItem, ListSubheader, Typography, Popover, Tooltip } from '@material-ui/core';
-import NotificationsTabs from './NotificationsTabs';
+import { makeStyles, Divider, Icon, Badge, IconButton, List, ListItem, ListSubheader, Typography, Popover, Tooltip } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -21,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 			marginLeft: 10
 		},
 		'& .top-dropdown-menu--item': {
-			padding:0,
+			padding: 0,
 		}
 	}
 }));
@@ -45,7 +44,14 @@ export default function Notifications(props) {
 				<IconButton aria-describedby={open ? 'notifications' : null} variant="contained" color="primary"
 					style={{ padding: '6px' }}
 					onClick={handleClick}>
-					<Icon className={props.iconColor}>notifications_none</Icon>
+					{props.new_notification ?
+						<Badge className={classes.badgeItem} badgeContent={1} color="secondary">
+							<Icon className={props.iconColor}>notifications_none</Icon>
+						</Badge>
+						:
+						<Icon className={props.iconColor}>notifications_none</Icon>
+					}
+
 				</IconButton>
 			</Tooltip>
 			<Popover
@@ -76,7 +82,7 @@ export default function Notifications(props) {
 					>
 						<Divider></Divider>
 						<ListItem component="div" className="top-dropdown-menu--item" >
-							<NotificationsTabs />								
+							{/* <NotificationsTabs />								 */}
 						</ListItem>
 					</List>
 				</Fragment>

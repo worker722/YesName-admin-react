@@ -53,7 +53,7 @@ export default function IconSidebar(props) {
 		<div className="sidebar-wrap">
 			<div className={classes.drawerHeader}>
 				<Box className="site-logo" mx="auto" display="inline-flex" alignItems="center">
-					<Box component={Link} to="/app/dashboard/dashboard1" lineHeight={0.8}>
+					<Box component={Link} to="/" lineHeight={0.8}>
 						<img src={require('assets/Images/hulk-sm.png')} alt="site logo" width="27" height="30" />
 					</Box>
 				</Box>

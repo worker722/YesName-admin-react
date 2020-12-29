@@ -3,14 +3,13 @@
  */
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';
-import { Grid, Box, LinearProgress, CircularProgress, Button, List, Card, ListItem, Typography } from '@material-ui/core';
+import { Grid, Box, LinearProgress, CircularProgress, List, Card, ListItem, Typography } from '@material-ui/core';
 
 import IntlMessages from 'util/IntlMessages';
-
+import DynamicLineEchart from 'components/GlobalComponents/Charts/DynamicLineEchart';
 
 // Component
 import { CustomCard } from 'components/GlobalComponents';
-import DynamicLineEchart from 'components/GlobalComponents/Charts/DynamicLineEchart';
 
 const styles = theme => ({
 	listItems: {
@@ -53,19 +52,19 @@ class DynamicDataChart extends Component {
 				icon: 'attach_money',
 				iconColor: 'text-primary',
 				title: 'widgets.totalRevenue',
-				count: '$190' 
+				count: '$190'
 			},
 			{
 				icon: 'shopping_cart',
 				iconColor: 'text-success',
 				title: 'widgets.totalOrders',
-				count: '71' 
+				count: '71'
 			},
 			{
 				icon: 'supervised_user_circle',
 				iconColor: 'text-danger',
 				title: 'widgets.totalUsers',
-				count: '32,451' 
+				count: '32,451'
 			}
 		],
 		progressData: [
@@ -103,11 +102,9 @@ class DynamicDataChart extends Component {
 									<Box display="flex" justifyContent="space-between" alignItems="center">
 										<Box display="flex" alignItems="center">
 											<Box mr={1} className="icon-wrap">
-												<i className={`material-icons ${data.iconColor} font-ls`}>
-													{data.icon}
-												</i>
+												<i className={`material-icons ${data.iconColor} font-ls`}> {data.icon} </i>
 											</Box>
-		                           			<Box className="font-weight-med"><IntlMessages id={data.title} /></Box>
+											<Box className="font-weight-med"><IntlMessages id={data.title} /></Box>
 										</Box>
 										<Box>
 											<Typography variant="h4" className="mb-0">{data.count}</Typography>
@@ -121,7 +118,7 @@ class DynamicDataChart extends Component {
 				</Grid>
 				<Grid container spacing={3} >
 					<Grid item xs={12} sm={12} md={12}>
-                  <CustomCard title={<IntlMessages id="widgets.overallTrafficStatus" />} showDivider={true}>
+						<CustomCard title={"Introduction video"} showDivider={true}>
 							<Grid container spacing={3} >
 								<Grid item xs={12} sm={12} md={7}>
 									<DynamicLineEchart height={'400px'} />
@@ -155,7 +152,7 @@ class DynamicDataChart extends Component {
 													<Card>
 														<Box px={2} py={3} textAlign="center">
 															<Box position="relative" display="inline-block">
-																<CircularProgress color="primary" thickness={4} size={100} variant="static" value={79} />
+																<CircularProgress color="primary" thickness={4} size={100} variant="determinate" value={79} />
 																<Box position="absolute" top={41} left={'38px'} fontSize="subtitle2.fontSize" fontWeight="500">79%</Box>
 															</Box>
 															<Box pt={1} display="flex" justifyContent="center" alignItems="center">
@@ -169,7 +166,7 @@ class DynamicDataChart extends Component {
 													<Card>
 														<Box px={2} py={3} textAlign="center">
 															<Box position="relative" display="inline-block">
-																<CircularProgress color="secondary" thickness={4} size={100} variant="static" value={79} />
+																<CircularProgress color="secondary" thickness={4} size={100} variant="determinate" value={79} />
 																<Box fontWeight="500" position="absolute" top={41} left={'38px'} fontSize="subtitle2.fontSize">79%</Box>
 															</Box>
 															<Box pt={1} display="flex" justifyContent="center" alignItems="center">
@@ -182,8 +179,8 @@ class DynamicDataChart extends Component {
 											</Grid>
 										</Box>
 										<Box mb={2} className="btn-group { classes.btnWrap}" textAlign="center">
-											<Button variant="outlined" className="primary-bg-btn" color="primary"  size="large" >Generate PDF</Button>
-											<Button variant="outlined" className="primary-bg-btn" color="primary" size="large">Report Bug</Button>
+											{/* <Button variant="outlined" className="primary-bg-btn" color="primary"  size="large" >Generate PDF</Button> */}
+											{/* <Button variant="outlined" className="primary-bg-btn" color="primary" size="large">Report Bug</Button> */}
 										</Box>
 									</div>
 								</Grid>

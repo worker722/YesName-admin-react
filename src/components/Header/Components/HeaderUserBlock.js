@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/styles';
 import { IconButton, List, ListItem, Button, ListSubheader, Typography, Popover, Tooltip, Avatar } from '@material-ui/core';
 
 // redux action
-import { hulkLogoutUserFirebase } from 'actions';
+import { hulkLogout } from 'actions';
 
 const styles = theme => ({
 	root: {
@@ -64,20 +64,20 @@ class HeaderUserBlock extends Component {
 				anchorEl: null,
 			}
 		)
-		this.props.hulkLogoutUserFirebase();
+		this.props.hulkLogout();
 	}
 
 	render() {
 		const { anchorEl } = this.state;
 		const open = Boolean(anchorEl);
-		const { classes } = this.props;
+		const { classes, authUser: { user } } = this.props;
 		return (
 			<div>
 				<Tooltip title="User Profile" placement="bottom">
 					<IconButton aria-describedby={open ? 'simple-popper' : null} variant="contained" color="primary"
 						style={{ padding: '6px' }}
 						onClick={this.handleClick}>
-						<Avatar alt="user-thumb" src={require('assets/Images/avatars/user-4.jpg')} />
+						<Avatar alt="user-thumb" src={user?.avatar} />
 					</IconButton>
 				</Tooltip>
 				<Popover
@@ -101,9 +101,9 @@ class HeaderUserBlock extends Component {
 							subheader={
 								<ListSubheader component="div" id="nested-list-subheader">
 									<div className="dropdown-header user-info  text-center">
-										<Avatar alt="user-thumb" className={classes.large} src={require('assets/Images/avatars/user-4.jpg')} />
-										<Typography variant="body2">Abigail Doe</Typography>
-										<Typography variant="subtitle2">Associate Manager</Typography>
+										<Avatar alt="user-thumb" className={classes.large} src={user?.avatar} />
+										<Typography variant="body2">{user?.name}</Typography>
+										<Typography variant="subtitle2">{user?.phone}</Typography>
 										<Button className="btn primary-bg-btn" component={Link} to="/app/user-settings" variant="outlined" color="primary">
 											Manage your account
 										</Button>
@@ -124,10 +124,10 @@ class HeaderUserBlock extends Component {
 	}
 }
 
-const mapStateToProps = ({ settings }) => {
-	return settings;
+const mapStateToProps = ({ authUser, settings }) => {
+	return { authUser, settings };
 }
 
 export default withRouter(connect(mapStateToProps, {
-	hulkLogoutUserFirebase
+	hulkLogout
 })(withStyles(styles)(HeaderUserBlock)));
