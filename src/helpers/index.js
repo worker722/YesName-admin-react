@@ -40,7 +40,13 @@ export function getLink(url) {
 	}
 	return url;
 }
+export function strisnull(str) {
+	if (!str || str.toLowerCase() === "null" || str.toLowerCase() === "(null)") {
+		return true;
+	}
+	return false;
+}
 export function date2str(date) {
 	Moment.locale('en');
-	return Moment(date).format('d MMM yyyy')
+	return Moment(date).format('D MMM yyyy')
 }

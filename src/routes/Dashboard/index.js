@@ -6,6 +6,9 @@ import { withStyles } from '@material-ui/styles';
 import { Paper, Container, Box } from '@material-ui/core';
 import DynamicDataChart from 'components/Widgets/DynamicDataChart';
 import { withTheme } from '@material-ui/core/styles';
+import { getUsers } from 'actions';
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 
 const styles = theme => ({
 	Paper: {
@@ -25,6 +28,9 @@ const styles = theme => ({
 });
 
 class Dashboard extends Component {
+	componentDidMount() {
+		this.props.getUsers();
+	}
 	render() {
 		const { classes } = this.props;
 		return (
@@ -41,4 +47,7 @@ class Dashboard extends Component {
 	}
 }
 
-export default withStyles(styles)(withTheme(Dashboard));
+const mapStateToProps = ({ users }) => {
+	return { users }
+}
+export default withRouter(connect(mapStateToProps, { getUsers })(withStyles(styles)(withTheme(Dashboard))));

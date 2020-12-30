@@ -10,7 +10,8 @@ import { Player } from 'video-react';
 import { CustomCard } from 'components/GlobalComponents';
 import { userService } from "../../_services";
 import { NotificationManager } from 'react-notifications';
-import { getLink } from 'helpers'
+import { getLink, strisnull } from 'helpers'
+import swal from 'sweetalert';
 
 const styles = theme => ({
 	Paper: {
@@ -76,7 +77,8 @@ class Settings extends Component {
 		userService.changeConfig({ introduction: introductionVideo })
 			.then(res => {
 				if (res.success === true) {
-					NotificationManager.success("Successfully updated the introduction video");
+					NotificationManager.success(`Successfully ${strisnull(introductionVideo) ? "deleted" : "updated"} the introduction video`);
+					this.getData();
 				}
 			})
 			.catch(err => {
@@ -104,12 +106,24 @@ class Settings extends Component {
 				})
 		}
 	}
-	remoteIntroVideo() {
-		this.setState({
-			introductionVideo: null,
-		}, () => {
-			this.updateVideo();
+	removeIntroVideo() {
+		swal({
+			title: "Are you sure?",
+			text: "Once deleted, you will not be able to recover this introduction video!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
 		})
+			.then((willDelete) => {
+				if (willDelete) {
+					this.setState({
+						introductionVideo: null,
+					}, () => {
+						this.updateVideo();
+					})
+				} else {
+				}
+			});
 	}
 	render() {
 		const { classes } = this.props;
@@ -122,12 +136,12 @@ class Settings extends Component {
 							<Grid container spacing={3} >
 								<Grid item xs={12} sm={6} md={4}>
 									<CustomCard title={"Introduction video"} showDivider={true}><br />
-										{introductionVideo ?
+										{strisnull(introductionVideo) ?
+											"Not showing introduction video page on app"
+											:
 											<Player>
 												<source src={getLink(introductionVideo)} />
 											</Player>
-											:
-											"Not showing introduction video page on app"
 										}
 										<br />
 										<input
@@ -139,14 +153,14 @@ class Settings extends Component {
 											onChange={(e) => this.uploadVideo(e)}
 										/>
 										<Button variant="contained" color="primary" component="span" onClick={this.change_video.bind(this)}> {introduction_video_file ? `Upload file (${introduction_video_file.name})` : "Choose Video"} </Button>
-										{introductionVideo &&
-											<Button variant="contained" color="secondary" component="span" style={{ marginLeft: 20 }} onClick={this.remoteIntroVideo}> Delete </Button>
+										{!strisnull(introductionVideo) &&
+											<Button variant="contained" color="secondary" component="span" style={{ marginLeft: 20 }} onClick={this.removeIntroVideo.bind(this)}> Delete </Button>
 										}
 									</CustomCard>
 								</Grid>
 								<Grid item xs={12} sm={6} md={4}>
 									<CustomCard title={"SMS to verification"} showDivider={true}>
-										<Input rows={5} multiline fullWidth value={verify_sms} onChange={(text) => this.setState({ verify_sms: text.target.value })} />{'*{code}'}<br /><br />
+										<Input rows={5} multiline fullWidth value={verify_sms} onChange={(text) => this.setState({ verify_sms: text.target.value })} /><p style={{textAlign:"right", color:"red"}}>{'*{code}'}</p>
 										<Button variant="contained" color="primary" component="span" onClick={this.saveSMS.bind(this)}> Save</Button>
 									</CustomCard>
 								</Grid>

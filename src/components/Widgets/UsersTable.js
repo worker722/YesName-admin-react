@@ -6,6 +6,7 @@ import MaterialTable from "material-table";
 import { withStyles } from '@material-ui/styles';
 import { Grid, Box, Typography, Avatar, Tooltip, IconButton } from '@material-ui/core';
 import swal from 'sweetalert';
+import { withTheme } from '@material-ui/core/styles';
 
 import IntlMessages from 'util/IntlMessages';
 import { getLink, date2str } from "helpers";
@@ -41,14 +42,14 @@ const styles = theme => ({
 });
 
 class UsersTable extends Component {
-
 	state = {
 		columns: [
-			{ title: 'Avatar', field: 'avatar', render: rowData => <img alt="user-thumb" src={getLink(rowData.avatar)} className="img-50 bdr-rad-50" /> },
+			{ title: 'Avatar', field: 'avatar', render: rowData => <Avatar alt="user-thumb" className="img-60 bdr-rad-60" src={getLink(rowData.avatar)} /> },
 			{ title: 'Name', field: 'name' },
 			{ title: 'Phone number', field: 'phone' },
 			{ title: 'Active', field: 'active', render: rowData => rowData.active === 0 ? "No Verifed" : rowData.active === 1 ? "Active" : rowData.active === 2 ? "Blocked" : rowData.active === 3 ? "Closed" : '' },
-			{ title: 'Verified date', field: 'verified_at' },
+			{ title: 'Verified date', field: 'verified_at', render: rowData => date2str(rowData.verified_at) },
+			// date2str
 			{
 				title: 'Registered date', field: 'created_at', render: rowData =>
 					<div>
@@ -155,7 +156,7 @@ class UsersTable extends Component {
 										</IconButton>
 									</Tooltip> */}
 									<Tooltip title="Edit" placement="bottom">
-										<IconButton className="preview-icon-btn" variant="outlined">
+										<IconButton className="preview-icon-btn" variant="outlined" onClick={() => this.props.onEdit(selectedRow.id)}>
 											<i className="material-icons">edit</i>
 										</IconButton>
 									</Tooltip>
@@ -164,11 +165,6 @@ class UsersTable extends Component {
 											<i className="material-icons">delete_outline</i>
 										</IconButton>
 									</Tooltip>
-									{/* <Tooltip title="PageView" placement="bottom">
-										<IconButton className="preview-icon-btn" variant="outlined">
-											<i className="material-icons-outlined">pageview</i>
-										</IconButton>
-									</Tooltip> */}
 								</Box>
 								<Box mb={2} className="preview-content">
 									<Typography variant="body2">
@@ -176,13 +172,18 @@ class UsersTable extends Component {
 										<span>{selectedRow.device}</span>
 									</Typography>
 									<Typography variant="body2">
+										<span>State :</span>
+										<span>{selectedRow.state}
+										</span>
+									</Typography>
+									<Typography variant="body2">
 										<span>Verified date : </span>
 										<span>{date2str(selectedRow.verified_at)}</span>
 									</Typography>
-									<Typography variant="body2">
+									{/* <Typography variant="body2">
 										<span>Created date :</span>
 										<span>{date2str(selectedRow.created_at)}</span>
-									</Typography>
+									</Typography> */}
 									<Typography variant="body2">
 										<span>Updated date :</span>
 										<span>{date2str(selectedRow.updated_at)}</span>
@@ -198,4 +199,4 @@ class UsersTable extends Component {
 		);
 	}
 }
-export default withRouter(connect(null, { getUsers })(withStyles(styles)(UsersTable)));
+export default withRouter(connect(null, { getUsers })(withStyles(styles)(withTheme(UsersTable))));
