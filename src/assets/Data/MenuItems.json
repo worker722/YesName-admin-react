@@ -23,6 +23,18 @@
 			"desc": true,
 			"content": "App default Settings",
 			"child_routes": null
+		},
+		{
+			"menu_title": "sidebar.users",
+			"path": "/app/users",
+			"icon": "people",
+			"category": "general",
+			"menu": "users",
+			"fullPageMenu": false,
+			"isMenuOpen": true,
+			"desc": true,
+			"content": "App users management",
+			"child_routes": null
 		}
 	]
 }

@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 		height: '2.625rem',
 		minWidth: '2.625rem',
 		borderRadius: 0,
-		padding: 0,
+		padding: 0, 
 		zIndex: 99,
 		right: -1,
 		position: 'fixed',

@@ -89,7 +89,7 @@ export default function NewUser() {
 					{newUsersData.map((item, i) => (
 						<ListItem key={i} className={classes.ListItem}>
 							<ListItemAvatar>
-								<Avatar className={classes.large} src={require(`assets/Images/avatars/${item.image}`)} alt="user-profile" />
+								{/* <Avatar className={classes.large} src={require(`assets/Images/avatars/${item.image}`)} alt="user-profile" /> */}
 							</ListItemAvatar>
 							<ListItemText>
 								<Box color="text.primary">{item.text1}</Box>

@@ -10,6 +10,7 @@ import { Player } from 'video-react';
 import { CustomCard } from 'components/GlobalComponents';
 import { userService } from "../../_services";
 import { NotificationManager } from 'react-notifications';
+import { getLink } from 'helpers'
 
 const styles = theme => ({
 	Paper: {
@@ -28,7 +29,7 @@ const styles = theme => ({
 class Settings extends Component {
 	state = {
 		introductionVideo: null,
-		verify_sms: null,
+		verify_sms: "",
 		introduction_video_file: null
 	}
 	componentDidMount() {
@@ -68,7 +69,18 @@ class Settings extends Component {
 			})
 			.catch(err => {
 				NotificationManager.error("Something went wrong");
-				console.log(err);
+			})
+	}
+	updateVideo() {
+		const { introductionVideo } = this.state;
+		userService.changeConfig({ introduction: introductionVideo })
+			.then(res => {
+				if (res.success === true) {
+					NotificationManager.success("Successfully updated the introduction video");
+				}
+			})
+			.catch(err => {
+				NotificationManager.error("Something went wrong");
 			})
 	}
 	change_video() {
@@ -76,18 +88,28 @@ class Settings extends Component {
 		if (!introduction_video_file) {
 			document.getElementById("introduction_video").click();
 		} else {
-			
-			const data = new FormData() 
-			data.append('file', introduction_video_file)
-
 			userService.uploadFile(introduction_video_file)
 				.then(res => {
-					console.log(res);
+					res = res.data;
+					this.setState({
+						introduction_video_file: null,
+						introductionVideo: res.path
+					}, () => {
+						this.updateVideo();
+					});
 				})
 				.catch(err => {
 					console.log(err);
+					NotificationManager.error("Something went wrong");
 				})
 		}
+	}
+	remoteIntroVideo() {
+		this.setState({
+			introductionVideo: null,
+		}, () => {
+			this.updateVideo();
+		})
 	}
 	render() {
 		const { classes } = this.props;
@@ -102,7 +124,7 @@ class Settings extends Component {
 									<CustomCard title={"Introduction video"} showDivider={true}><br />
 										{introductionVideo ?
 											<Player>
-												<source src={introductionVideo} />
+												<source src={getLink(introductionVideo)} />
 											</Player>
 											:
 											"Not showing introduction video page on app"
@@ -114,11 +136,11 @@ class Settings extends Component {
 											type="file"
 											id="introduction_video"
 											hidden
-											onChange={this.uploadVideo.bind(this)}
+											onChange={(e) => this.uploadVideo(e)}
 										/>
 										<Button variant="contained" color="primary" component="span" onClick={this.change_video.bind(this)}> {introduction_video_file ? `Upload file (${introduction_video_file.name})` : "Choose Video"} </Button>
 										{introductionVideo &&
-											<Button variant="contained" color="secondary" component="span" style={{ marginLeft: 20 }}> Delete </Button>
+											<Button variant="contained" color="secondary" component="span" style={{ marginLeft: 20 }} onClick={this.remoteIntroVideo}> Delete </Button>
 										}
 									</CustomCard>
 								</Grid>

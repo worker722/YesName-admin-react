@@ -12,5 +12,12 @@
 		"icon": "settings",
 		"isMenuOpen": false,
 		"child_routes": null
+	},
+	{
+		"menu_title": "sidebar.users",
+		"path": "/app/users",
+		"icon": "people",
+		"isMenuOpen": false,
+		"child_routes": null
 	}
 ]

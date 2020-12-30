@@ -7,6 +7,10 @@
 		{
 			"name": "App Settings",
 			"url": "/app/settings"
+		},
+		{
+			"name": "Users",
+			"url": "/app/users"
 		}
 	]
 }

@@ -173,7 +173,7 @@ class LiveChatSupport extends Component {
 									{msg.role === "client" ?
 										<Box display="flex" alignItems="flex-start" mb="5px" p="5px 10px 5px  0px">
 											<Box pr={2} className="user-thumb">
-												<Avatar alt="user-profile" src={require(`assets/Images/avatars/${msg.image}`)} />
+												{/* <Avatar alt="user-profile" src={require(`assets/Images/avatars/${msg.image}`)} /> */}
 											</Box>
 											<Box>
 												<Box mb="5px" p={1} borderRadius="borderRadius" className={`admin-content ${classes.shadow}`}>
@@ -185,7 +185,7 @@ class LiveChatSupport extends Component {
 										:
 										<Box display="flex" alignItems="flex-start" flexDirection="row-reverse" mb="5px" p="5px 0px 5px  10px">
 											<Box pl={2} className="admin-thumb">
-												<Avatar alt="admin-thumb" src={require(`assets/Images/avatars/${msg.image}`)} />
+												{/* <Avatar alt="admin-thumb" src={require(`assets/Images/avatars/${msg.image}`)} /> */}
 											</Box>
 											<Box>
 												<Box mb="5px" p={1} bgcolor="primary.main" borderRadius="borderRadius">
@@ -205,7 +205,7 @@ class LiveChatSupport extends Component {
 									<ListItem className={classes.navList}>
 										<Box display="flex" alignItems="flex-start">
 											<Box pr={2}>
-												<Avatar src={require('assets/Images/avatars/user-2.jpg')} />
+												{/* <Avatar src={require('assets/Images/avatars/user-2.jpg')} /> */}
 											</Box>
 											<Box>
 												<Box mb="5px" px={2} py={1} borderRadius="borderRadius" className={`admin-content ${classes.shadow}`}>

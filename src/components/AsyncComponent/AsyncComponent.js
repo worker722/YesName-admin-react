@@ -16,7 +16,13 @@ const AsyncSettingsComponent = Loadable({
 	loading: () => <HulkPageLoader />,
 	delay: 3000,
 });
+const AsyncUsersComponent = Loadable({
+	loader: () => import("routes/users"),
+	loading: () => <HulkPageLoader />,
+	delay: 3000,
+});
 export {
 	AsyncDashboardComponent,
-	AsyncSettings
+	AsyncSettingsComponent,
+	AsyncUsersComponent
 };

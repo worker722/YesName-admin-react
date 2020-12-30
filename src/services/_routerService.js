@@ -3,6 +3,7 @@
 */
 import Dashboard from 'routes/Dashboard'
 import Settings from 'routes/Settings'
+import Users from 'routes/Users'
 export default [
 	{
 		path: 'dashboard',
@@ -11,5 +12,9 @@ export default [
 	{
 		path: 'settings',
 		component: Settings
+	},
+	{
+		path: 'users',
+		component: Users
 	}
 ]

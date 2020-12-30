@@ -5,7 +5,7 @@ import {
 	LOGIN_EMAIL_CHANGED,
 	LOGIN_PASSWORD_CHANGED,
 	LOGOUT_USER
-} from 'actions/Types'
+} from 'actions/Types' 
 
 /**
  * Initial auth user
@@ -13,8 +13,8 @@ import {
 const INIT_STATE = {
 	user: JSON.parse(localStorage.getItem("user")),
 	loading: false,
-	email: 'yesname@admin.com',
-	password: 'secret',
+	email: '',
+	password: '',
 	error: ''
 }
 
@@ -22,7 +22,6 @@ export default (state = INIT_STATE, action) => {
 	switch (action.type) {
 		case LOGIN_USER:
 			return { ...state, loading: true };
-
 		case LOGIN_USER_SUCCESS:
 			return { ...state,  loading: false, user: action.payload };
 

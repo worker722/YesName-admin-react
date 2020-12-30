@@ -1,22 +1,26 @@
 /**
  * App Config File
 */
+const DEBUGGING = false;
+const PRODUCTION = true;
 
 const AppConfig = {
 	brandName: 'Hulk',
 	copyRightText: 'Copyright © 2020 IRON Network, All Rights Reserved.',
+	debugging: DEBUGGING,
+	SERVER_HOST: PRODUCTION ? "http://tntest.terasys-network.info:3333" : "http://localhost:3333",
 	navCollapsed: true,
 	mobileSidebarToggle: false,
 	isDarkModeActive: false,
 	isRtlActive: false,
 	isHorizontalMenuActive: false,
-	isMiniSidebarActive:false,
-   selectedThemeColor:'light-theme',
-   locale: {
-      languageId: 'english',
-      locale: 'en',
-      name: 'English',
-      icon: 'usa.png',
+	isMiniSidebarActive: false,
+	selectedThemeColor: 'light-theme',
+	locale: {
+		languageId: 'english',
+		locale: 'en',
+		name: 'English',
+		icon: 'usa.png',
 	},
 	// Default Theme Colors 
 	lightThemeColors: {
@@ -32,8 +36,8 @@ const AppConfig = {
 		'icon': '#717275',
 		'bgPaper': '#FFFFFF',
 		'bgDefault': '#f3f7fa',
-		'white':'#ffffff',
-		'black':'#000000'
+		'white': '#ffffff',
+		'black': '#000000'
 	},
 	// Teal Theme Colors
 	tealThemeColors: {
@@ -49,8 +53,8 @@ const AppConfig = {
 		'icon': '#717275',
 		'bgPaper': '#FFFFFF',
 		'bgDefault': '#f3f7fa',
-		'white':'#ffffff',
-		'black':'#000000'
+		'white': '#ffffff',
+		'black': '#000000'
 	},
 	// Violet Theme Colors
 	violetThemeColors: {
@@ -66,8 +70,8 @@ const AppConfig = {
 		'icon': '#717275',
 		'bgPaper': '#FFFFFF',
 		'bgDefault': '#f3f7fa',
-		'white':'#ffffff',
-		'black':'#000000'
+		'white': '#ffffff',
+		'black': '#000000'
 	},
 	// Dark Theme Colors
 	darkThemeColors: {
@@ -81,10 +85,10 @@ const AppConfig = {
 		'textSecondary': '#717275',
 		'divider': 'rgba(255,255,255,0.12)',
 		'icon': '#717275',
-		'bgPaper': '#27293c', 
-		'bgDefault': '#1e1e2e', 
-		'white':'#ffffff',
-		'black':'#000000'
+		'bgPaper': '#27293c',
+		'bgDefault': '#1e1e2e',
+		'white': '#ffffff',
+		'black': '#000000'
 	}
 }
 

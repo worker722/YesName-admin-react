@@ -1,3 +1,6 @@
+import AppConfig from "constants/AppConfig";
+import Moment from 'moment';
+
 /**
  * Helpers Functions
  */
@@ -29,4 +32,15 @@ export function hexToRgbA(hex, alpha) {
 		return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + alpha + ')';
 	}
 	throw new Error('Bad Hex');
+}
+
+export function getLink(url) {
+	if (url && !url.includes("http://") && !url.includes("https://")) {
+		return `${AppConfig.SERVER_HOST}${url}`;
+	}
+	return url;
+}
+export function date2str(date) {
+	Moment.locale('en');
+	return Moment(date).format('d MMM yyyy')
 }

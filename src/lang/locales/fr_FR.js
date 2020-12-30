@@ -1,9 +1,7 @@
 export default {
    "sidebar.dashboard": "Tableau de bord",
    "sidebar.settings": "Settings",
-   "sidebar.dashboard1": "Tableau de bord 1",
-   "sidebar.dashboard2": "Tableau de bord 2",
-   "sidebar.dashboard3": "Tableau de bord 3",
+   "sidebar.users": "Users",
    "sidebar.videoPlayer" : "Lecteur vidéo",
    "sidebar.multilevelmenu": "Menu à plusieurs niveaux",
    "sidebar.level1": "Niveau 1",

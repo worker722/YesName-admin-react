@@ -1,9 +1,7 @@
 export default {
    "sidebar.dashboard" : "Dashboard",
    "sidebar.settings" : "Settings",
-   "sidebar.dashboard1" : "Dashboard 1",
-   "sidebar.dashboard2" : "Dashboard 2",
-   "sidebar.dashboard3" : "Dashboard 3",
+   "sidebar.users" : "Users",
 	"sidebar.fullpagemenu" : "Full Page Menu",
    "sidebar.videoPlayer" : "Video Player",
    "sidebar.level1": "Level 1",
