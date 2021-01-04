@@ -44,7 +44,7 @@ const styles = theme => ({
 class UsersTable extends Component {
 	state = {
 		columns: [
-			{ title: 'Avatar', field: 'avatar', render: rowData => <Avatar alt="user-thumb" className="img-60 bdr-rad-60" src={getLink(rowData.avatar)} /> },
+			{ title: 'Avatar', field: 'avatar', render: rowData => <Avatar alt={rowData.name?.toUpperCase()} className="img-60 bdr-rad-60" src={getLink(rowData.avatar)} /> },
 			{ title: 'Name', field: 'name' },
 			{ title: 'Phone number', field: 'phone' },
 			{ title: 'Active', field: 'active', render: rowData => rowData.active === 0 ? "No Verifed" : rowData.active === 1 ? "Active" : rowData.active === 2 ? "Blocked" : rowData.active === 3 ? "Closed" : '' },
@@ -143,8 +143,8 @@ class UsersTable extends Component {
 						{selectedRow ?
 							<>
 								<Box mb={2} textAlign="center">
-									<Avatar alt="user-thumb" className="avatar-wrap" src={getLink(selectedRow.avatar)} />
-									<Box pl={2}>
+									<Avatar alt={selectedRow.name?.toUpperCase()} className="avatar-wrap" src={getLink(selectedRow.avatar)} />
+									<Box>
 										<Box fontWeight={500}>{selectedRow.name}</Box>
 										<Typography variant="subtitle2">{selectedRow.phone}</Typography>
 									</Box>
@@ -174,6 +174,16 @@ class UsersTable extends Component {
 									<Typography variant="body2">
 										<span>State :</span>
 										<span>{selectedRow.state}
+										</span>
+									</Typography>
+									<Typography variant="body2">
+										<span>Intro Video :</span>
+										<span>{selectedRow.visit_intro === 1 ? "Visited" : ""}
+										</span>
+									</Typography>
+									<Typography variant="body2">
+										<span>Invite Friend :</span>
+										<span>{selectedRow.visit_invite === 1 ? "Visited" : ""}
 										</span>
 									</Typography>
 									<Typography variant="body2">

@@ -47,26 +47,7 @@ const styles = theme => ({
 
 class DynamicDataChart extends Component {
 	state = {
-		stats: [
-			{
-				icon: 'attach_money',
-				iconColor: 'text-primary',
-				title: 'widgets.totalRevenue',
-				count: '$190'
-			},
-			{
-				icon: 'shopping_cart',
-				iconColor: 'text-success',
-				title: 'widgets.totalOrders',
-				count: '71'
-			},
-			{
-				icon: 'supervised_user_circle',
-				iconColor: 'text-danger',
-				title: 'widgets.totalUsers',
-				count: '32,451'
-			}
-		],
+		stats: this.props.stats,
 		progressData: [
 			{
 				id: 1,

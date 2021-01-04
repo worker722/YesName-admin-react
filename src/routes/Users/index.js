@@ -52,7 +52,6 @@ class Users extends Component {
 
 	render() {
 		const { users } = this.props;
-		console.log(styles.large);
 		const { dialog_visible, edit_user } = this.state;
 		return (
 			<div className="new-dashboard">
@@ -69,12 +68,8 @@ class Users extends Component {
 						<TextField autoFocus margin="dense" id="name" label="Email Address" type="email" fullWidth />
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={this.closeDialog.bind(this)} color="primary">
-							Cancel
-          </Button>
-						<Button onClick={this.saveDialog.bind(this)} color="primary">
-							Subscribe
-          </Button>
+						<Button onClick={this.closeDialog.bind(this)} color="primary"> Cancel </Button>
+						<Button onClick={this.saveDialog.bind(this)} color="primary"> Subscribe </Button>
 					</DialogActions>
 				</Dialog>
 			</div>

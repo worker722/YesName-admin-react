@@ -35,6 +35,7 @@ export function hexToRgbA(hex, alpha) {
 }
 
 export function getLink(url) {
+	console.log(url);
 	if (url && !url.includes("http://") && !url.includes("https://")) {
 		return `${AppConfig.SERVER_HOST}${url}`;
 	}

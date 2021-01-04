@@ -28,8 +28,32 @@ const styles = theme => ({
 });
 
 class Dashboard extends Component {
+
 	componentDidMount() {
 		this.props.getUsers();
+	}
+	getStats() {
+		const { users: { users } } = this.props;
+		return [
+			{
+				icon: 'supervised_user_circle',
+				iconColor: 'text-danger',
+				title: 'widgets.totalUsers',
+				count: users.length
+			},
+			{
+				icon: 'supervised_user_circle',
+				iconColor: 'text-primary',
+				title: 'Allowed users',
+				count: users.filter(item => item.state === 1).length
+			},
+			{
+				icon: 'shopping_cart',
+				iconColor: 'text-success',
+				title: 'Blocked users',
+				count: users.filter(item => item.state === 2).length
+			}
+		];
 	}
 	render() {
 		const { classes } = this.props;
@@ -38,7 +62,7 @@ class Dashboard extends Component {
 				<Container maxWidth="lg">
 					<Box pt={3}>
 						<Paper className={classes.Paper} square >
-							<DynamicDataChart />
+							<DynamicDataChart stats={this.getStats()} />
 						</Paper>
 					</Box>
 				</Container>
