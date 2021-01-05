@@ -15,18 +15,20 @@ import './lib/hulkCss';
 
 // Store
 import { store } from './store';
+import Page404 from './routes/Error/404';
 
 function MainApp() {
 	return (
-      <Provider store={store}>
+		<Provider store={store}>
 			<MuiPickersUtilsProvider utils={MomentUtils}>
 				<Router>
 					<Switch>
 						<Route path="/" component={App} />
+						<Route component={Page404} />
 					</Switch>
 				</Router>
 			</MuiPickersUtilsProvider>
-      </Provider>
+		</Provider>
 	);
 }
 

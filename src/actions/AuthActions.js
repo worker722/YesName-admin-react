@@ -25,7 +25,6 @@ export const signinUser = (user, history) => (dispatch) => {
 			}
 		})
 		.catch((error) => {
-			console.log("error", error);
 			loginUserFailure(dispatch, error);
 		})
 }

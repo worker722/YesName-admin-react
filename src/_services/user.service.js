@@ -6,7 +6,10 @@ export const userService = {
    changeConfig,
    uploadFile,
    getUsers,
-   deleteUser
+   deleteUser,
+   getStates,
+   updateUser,
+   getFriends
 };
 
 const _REQUESTTOSERVER = (url, params) => {
@@ -37,8 +40,14 @@ function changeConfig(data) {
 function getUsers() {
    return _REQUESTTOSERVER("users", null);
 }
+function updateUser(userid, data) {
+   return _REQUESTTOSERVER(`user/update/${userid}`, data);
+}
 function deleteUser(userid) {
    return _REQUESTTOSERVER("users/delete", { userid });
+}
+function getStates() {
+   return _REQUESTTOSERVER("states", null);
 }
 function uploadFile(file) {
    const url = `${AppConfig.SERVER_HOST}/admin/upload`;
@@ -50,4 +59,7 @@ function uploadFile(file) {
       }
    }
    return post(url, formData, config)
+}
+function getFriends(userid) {
+   return _REQUESTTOSERVER("users/friends", { userid });
 }

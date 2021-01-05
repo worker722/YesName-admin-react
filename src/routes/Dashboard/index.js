@@ -33,7 +33,10 @@ class Dashboard extends Component {
 		this.props.getUsers();
 	}
 	getStats() {
-		const { users: { users } } = this.props;
+		let { users: { users } } = this.props;
+		if (!users) {
+			users = [];
+		}
 		return [
 			{
 				icon: 'supervised_user_circle',

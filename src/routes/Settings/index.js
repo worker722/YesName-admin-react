@@ -101,7 +101,6 @@ class Settings extends Component {
 					});
 				})
 				.catch(err => {
-					console.log(err);
 					NotificationManager.error("Something went wrong");
 				})
 		}

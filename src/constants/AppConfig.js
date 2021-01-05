@@ -1,8 +1,8 @@
 /**
  * App Config File
 */
-const DEBUGGING = true;
-const PRODUCTION = false;
+const DEBUGGING = false;
+const PRODUCTION = true;
 
 const AppConfig = {
 	brandName: 'Hulk',

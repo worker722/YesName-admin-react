@@ -13,3 +13,6 @@ export * from './MenuListActions'
 
 // users action
 export * from './UsersActions'
+
+// states action
+export * from './StatesActions'
