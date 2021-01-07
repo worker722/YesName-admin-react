@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';
-import { Paper, Container, Box, Grid, Button, Input } from '@material-ui/core';
+import { Paper, Container, Box, Grid, Button, Input, Select, MenuItem } from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
 import 'video-react/dist/video-react.css';
 import { Player } from 'video-react';
@@ -31,6 +31,7 @@ class Settings extends Component {
 	state = {
 		introductionVideo: null,
 		verify_sms: "",
+		invite_sms: "",
 		introduction_video_file: null
 	}
 	componentDidMount() {
@@ -43,9 +44,11 @@ class Settings extends Component {
 					const config = res.config;
 					const introductionVideo = config.find(item => item.key === "introduction").value;
 					const verify_sms = config.find(item => item.key === "verify_sms").value;
+					const invite_sms = config.find(item => item.key === "invite_sms").value;
 					this.setState({
 						introductionVideo,
-						verify_sms
+						verify_sms,
+						invite_sms,
 					});
 				}
 			})
@@ -56,16 +59,14 @@ class Settings extends Component {
 	uploadVideo(e) {
 		this.setState({ introduction_video_file: e.target.files[0] });
 	}
-	saveSMS() {
-		let { verify_sms } = this.state;
-		if (!verify_sms?.includes("{code}")) {
-			NotificationManager.error("Verification sms text must be contains '{code}'");
-			return;
-		}
-		userService.changeConfig({ verify_sms })
+	saveSMS(type) {
+		let { verify_sms, invite_sms } = this.state;
+		if (type === 0 && !verify_sms?.includes("{code}"))
+			return NotificationManager.error("Verification SMS text must be contains '{code}'");
+		userService.changeConfig(type === 0 ? { verify_sms } : { invite_sms })
 			.then(res => {
 				if (res.success === true) {
-					NotificationManager.success("Successfully updated the verification sms");
+					NotificationManager.success(`Successfully updated the ${type === 0 ? "verification" : "Invite"} SMS`);
 				}
 			})
 			.catch(err => {
@@ -126,7 +127,7 @@ class Settings extends Component {
 	}
 	render() {
 		const { classes } = this.props;
-		const { introductionVideo, verify_sms, introduction_video_file } = this.state;
+		const { introductionVideo, verify_sms, invite_sms, introduction_video_file } = this.state;
 		return (
 			<div className="new-dashboard">
 				<Container maxWidth="lg">
@@ -159,8 +160,25 @@ class Settings extends Component {
 								</Grid>
 								<Grid item xs={12} sm={6} md={4}>
 									<CustomCard title={"SMS to verification"} showDivider={true}>
-										<Input rows={5} multiline fullWidth value={verify_sms} onChange={(text) => this.setState({ verify_sms: text.target.value })} /><p style={{textAlign:"right", color:"red"}}>{'*{code}'}</p>
-										<Button variant="contained" color="primary" component="span" onClick={this.saveSMS.bind(this)}> Save</Button>
+										<Input rows={8} multiline fullWidth value={verify_sms} onChange={(text) => this.setState({ verify_sms: text.target.value })} /><p style={{ textAlign: "right", color: "red" }}>{'*{code}'}</p>
+										<Button variant="contained" color="primary" component="span" onClick={() => this.saveSMS(0)}> Save</Button>
+									</CustomCard>
+								</Grid>
+								<Grid item xs={12} sm={6} md={4}>
+									<CustomCard title={"SMS to Invite user"} showDivider={true}>
+										<Select
+											style={{ width: "100%", marginTop: 4, marginBottom: 3 }}
+											value={0}
+											onChange={(event) => this.setState({ invite_sms: `${invite_sms}\n${event.target.value}` })}
+											displayEmpty
+										>
+											<MenuItem value={0}><em>Add Variables</em></MenuItem>
+											<MenuItem value={"{app link}"}>App Link</MenuItem>
+											<MenuItem value={"{sender name}"}>Sender Name</MenuItem>
+											<MenuItem value={"{sender phone}"}>Sender Phone</MenuItem>
+										</Select>
+										<Input rows={8} multiline fullWidth value={invite_sms} onChange={(text) => this.setState({ invite_sms: text.target.value })} /><p></p>
+										<Button variant="contained" color="primary" component="span" onClick={() => this.saveSMS(1)}> Save</Button>
 									</CustomCard>
 								</Grid>
 							</Grid>

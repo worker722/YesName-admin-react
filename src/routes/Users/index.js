@@ -94,7 +94,11 @@ class Users extends Component {
 			};
 			const update_res = await userService.updateUser(edit_user.id, data);
 			if (update_res.success) {
-				this.props.getUsers();
+				if (this.props.users?.userid > 0) {
+					this.props.getFriends(this.props.users?.userid);
+				} else {
+					this.props.getUsers();
+				}
 				NotificationManager.success("Successfully updated");
 			} else {
 				throw new Error("Something went wrong");
@@ -134,7 +138,7 @@ class Users extends Component {
 		const { users } = this.props;
 		try {
 			if (users.userid > 0) return users.users.find(item => item.id === users.userid);
-		}catch(err){
+		} catch (err) {
 
 		}
 		return null;

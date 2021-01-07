@@ -114,7 +114,12 @@ class UsersTable extends Component {
 				if (willDelete) {
 					userService.deleteUser(userid)
 						.then(res => {
-							this.props.getUsers();
+							const { selected_user } = this.props;
+							if (selected_user && selected_user.id > 0) {
+								this.props.getFriends(selected_user.id);
+							} else {
+								this.props.getUsers();
+							}
 							this.setState({ selectedRow: null });
 							swal("Poof! User has been deleted!", {
 								icon: "success",
@@ -133,7 +138,7 @@ class UsersTable extends Component {
 				<Grid item xs={12} sm={12} md={selectedRow ? 8 : 12}>
 					<Box className={`custom-table-wrap ${classes.root}`}>
 						{selected_user &&
-							<Button size="small" style={{ marginLeft: 20, position:"absolute", left:"20%", zIndex:99999999, top:40 }} onClick={() => this.props.getUsers()} variant="contained" color="primary">Show all Users</Button>
+							<Button size="small" style={{ marginLeft: 20, position: "absolute", left: "20%", zIndex: 99999999, top: 40 }} onClick={() => this.props.getUsers()} variant="contained" color="primary">Show all Users</Button>
 						}
 						<MaterialTable
 							isLoading={loading}
@@ -172,11 +177,11 @@ class UsersTable extends Component {
 								</Box>
 							</Box>
 							<Box mb={2} textAlign="center">
-								<Tooltip title="Friends" placement="bottom">
+								{/* <Tooltip title="Friends" placement="bottom">
 									<IconButton className="preview-icon-btn" variant="outlined" onClick={() => { this.props.getFriends(selectedRow.id); this.closePreview(); }}>
 										<i className="material-icons-outlined">nature_people</i>
 									</IconButton>
-								</Tooltip>
+								</Tooltip> */}
 								<Tooltip title="Edit" placement="bottom">
 									<IconButton className="preview-icon-btn" variant="outlined" onClick={() => this.props.onEdit(selectedRow.id)}>
 										<i className="material-icons">edit</i>
