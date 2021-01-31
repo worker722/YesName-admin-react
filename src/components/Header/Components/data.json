@@ -19,5 +19,12 @@
 		"icon": "people",
 		"isMenuOpen": false,
 		"child_routes": null
+ 	},
+	{
+		"menu_title": "sidebar.stories",
+		"path": "/app/stories",
+		"icon": "image",
+		"isMenuOpen": false,
+		"child_routes": null
 	}
 ]

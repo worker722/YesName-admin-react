@@ -35,6 +35,18 @@
 			"desc": true,
 			"content": "App users management",
 			"child_routes": null
+		},
+		{
+			"menu_title": "sidebar.stories",
+			"path": "/app/stories",
+			"icon": "image",
+			"category": "general",
+			"menu": "stories",
+			"fullPageMenu": false,
+			"isMenuOpen": true,
+			"desc": true,
+			"content": "User Stories",
+			"child_routes": null
 		}
 	]
 }

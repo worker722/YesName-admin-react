@@ -11,6 +11,10 @@
 		{
 			"name": "Users",
 			"url": "/app/users"
+		},
+		{
+			"name": "Stories",
+			"url": "/app/stories"
 		}
 	]
 }
