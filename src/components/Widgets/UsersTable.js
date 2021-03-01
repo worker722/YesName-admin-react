@@ -34,12 +34,6 @@ const styles = theme => ({
 			}
 		}
 	},
-	content: {
-
-	},
-	menuButton: {
-
-	}
 });
 
 class UsersTable extends Component {
@@ -131,7 +125,7 @@ class UsersTable extends Component {
 			});
 	}
 	render() {
-		const { classes, loading, data, selected_user } = this.props;
+		const { classes, loading, data, selected_user, theme } = this.props;
 		const { selectedRow } = this.state;
 		return (
 			<Grid container spacing={0} className="res-custom-table">
@@ -156,7 +150,7 @@ class UsersTable extends Component {
 							data={(data && data.length > 0) ? data : []}
 							options={{
 								rowStyle: rowData => ({
-									backgroundColor: (selectedRow && selectedRow.tableData.id === rowData.tableData.id) ? '#f3f7fa' : '#FFF'
+									backgroundColor: (selectedRow && selectedRow.tableData.id === rowData.tableData.id) ? theme.palette.background.default : theme.palette.background.paper
 								})
 							}}
 							onRowClick={this.handleRowClick}
@@ -173,7 +167,7 @@ class UsersTable extends Component {
 								<Avatar alt={selectedRow.name?.toUpperCase()} className="avatar-wrap" src={getLink(selectedRow.avatar)} />
 								<Box>
 									<Box fontWeight={500}>{selectedRow.name}</Box>
-									<Typography variant="subtitle2">{selectedRow.phone}</Typography>
+									<Box fontSize={12} fontWeight={100}>{selectedRow.phone}</Box>
 								</Box>
 							</Box>
 							<Box mb={2} textAlign="center">
@@ -194,33 +188,30 @@ class UsersTable extends Component {
 								</Tooltip>
 							</Box>
 							<Box mb={2} className="preview-content">
-								<Typography variant="body2">
-									<span>Device SN :</span>
-									<span>{selectedRow.device}</span>
-								</Typography>
-								<Typography variant="body2">
-									<span>State :</span>
-									<span>{selectedRow.state}
-									</span>
-								</Typography>
-								<Typography variant="body2">
-									<span>Intro Video :</span>
-									<span>{selectedRow.visit_intro === 1 ? "Visited" : ""}
-									</span>
-								</Typography>
-								<Typography variant="body2">
-									<span>Invite Friend :</span>
-									<span>{selectedRow.visit_invite === 1 ? "Visited" : ""}
-									</span>
-								</Typography>
-								<Typography variant="body2">
-									<span>Verified date : </span>
-									<span>{date2str(selectedRow.verified_at)}</span>
-								</Typography>
-								<Typography variant="body2">
-									<span>Updated date :</span>
-									<span>{date2str(selectedRow.updated_at)}</span>
-								</Typography>
+								<Box display="flex" flexDirection="row">
+									<Box p={1}>Device SN :</Box>
+									<Box p={1}>{selectedRow.device}</Box>
+								</Box>
+								<Box display="flex" flexDirection="row">
+									<Box p={1}>State :</Box>
+									<Box p={1}>{selectedRow.state}</Box>
+								</Box>
+								<Box display="flex" flexDirection="row">
+									<Box p={1}>Intro Video :</Box>
+									<Box p={1}>{selectedRow.visit_intro === 1 ? "Visited" : ""}</Box>
+								</Box>
+								<Box display="flex" flexDirection="row">
+									<Box p={1}>Invite Friend :</Box>
+									<Box p={1}>{selectedRow.visit_invite === 1 ? "Visited" : ""}</Box>
+								</Box>
+								<Box display="flex" flexDirection="row">
+									<Box p={1}>Verified date : </Box>
+									<Box p={1}>{date2str(selectedRow.verified_at)}</Box>
+								</Box>
+								<Box display="flex" flexDirection="row">
+									<Box p={1}>Updated date :</Box>
+									<Box p={1}>{date2str(selectedRow.updated_at)}</Box>
+								</Box>
 							</Box>
 						</CustomCard>
 					</Grid>

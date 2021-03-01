@@ -9,13 +9,13 @@ import 'video-react/dist/video-react.css';
 import UsersTable from "components/Widgets/UsersTable";
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { getUsers, getStates, getFriends } from 'actions';
 import { getLink } from "helpers";
 import { Edit as EditIcon, Clear as ClearIcon } from '@material-ui/icons';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { userService } from "../../_services";
 import { NotificationManager } from 'react-notifications';
+import * as actions from 'actions';
 
 const styles = theme => ({
 	Paper: {
@@ -243,6 +243,6 @@ class Users extends Component {
 		);
 	}
 }
-const mapStateToProps = ({ users, states }) => ({ users, states })
-const dispatchToProps = { getUsers, getStates, getFriends };
+const mapStateToProps = (state) => (state)
+const dispatchToProps = { ...actions };
 export default withRouter(connect(mapStateToProps, dispatchToProps)(withStyles(styles)(withTheme(Users))));

@@ -5,4 +5,5 @@ export default {
 	"sidebar.fullpagemenu" : "Full Page Menu",
    "sidebar.videoPlayer" : "Video Player",
    "sidebar.stories": "Stories",
+   "widgets.users":"Users"
 }
