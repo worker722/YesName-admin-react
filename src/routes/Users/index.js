@@ -224,7 +224,7 @@ class Users extends Component {
 								/>
 							</Grid>
 							<Grid item md={3}>
-								<InputLabel shrink id="state_label">Viste Intro page</InputLabel>
+								<InputLabel shrink id="state_label">Viste Invite page</InputLabel>
 								<Switch
 									checked={edit_user?.visit_invite}
 									onChange={(event) => this.changeUser({ visit_invite: event.target.checked })}
