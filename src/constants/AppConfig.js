@@ -5,8 +5,8 @@ const DEBUGGING = false;
 const PRODUCTION = true;
 
 const AppConfig = {
-	brandName: 'Hulk',
-	copyRightText: 'Copyright © 2020 IRON Network, All Rights Reserved.',
+	brandName: 'MoRe',
+	copyRightText: 'Copyright © 2021',
 	debugging: DEBUGGING,
 	SERVER_HOST: PRODUCTION ? "http://tntest.terasys-network.info:3333" : "http://localhost:3333",
 	navCollapsed: true,

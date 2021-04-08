@@ -94,9 +94,9 @@ class Signin extends Component {
 						<Box width="100%">
 							<Box textAlign="center" className="session-logo" >
 								{isDarkModeActive ?
-									<img className="img-fluid" alt="img" width="100" src={require(`assets/Images/hulk-light.png`)} />
+									<img className="img-fluid" alt="img" width="100" src={require(`assets/Images/logo-light.png`)} />
 									:
-									<img className="img-fluid" alt="img" width="100" src={require(`assets/Images/hulk-dark.png`)} />
+									<img className="img-fluid" alt="img" width="100" src={require(`assets/Images/logo-dark.png`)} />
 								}
 							</Box>
 							<CustomCard>

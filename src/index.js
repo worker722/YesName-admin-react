@@ -1,5 +1,5 @@
 /**
- * Hulk - A Material Design Admin Template
+ * MoRe - A Material Design Admin Template
  * Copyright 2020 All Rights Reserved
  * Made Wih Love
  * Created By The Iron Network, LLC
