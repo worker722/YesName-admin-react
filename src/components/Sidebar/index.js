@@ -47,8 +47,8 @@ export default function Sidebar(props) {
 			<div className="sidebar-wrap h-100">
 				<div className={classes.drawerHeader}>
 						<Box className="site-logo" display="inline-flex" alignItems="center">
-							<Box component={Link} to="/" className="logo-mini" lineHeight={0.8}>
-								<img src={require('assets/Images/logo-light.png')} alt="site-logo" width="90" height="22" />
+							<Box component={Link} to="/" className="logo-mini" lineHeight={0.8} >
+								<img src={require('assets/Images/logo-light.png')} alt="site-logo" width="120"  />
 							</Box>
 						</Box>
 					</div>

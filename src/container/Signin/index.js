@@ -94,15 +94,15 @@ class Signin extends Component {
 						<Box width="100%">
 							<Box textAlign="center" className="session-logo" >
 								{isDarkModeActive ?
-									<img className="img-fluid" alt="img" width="100" src={require(`assets/Images/logo-light.png`)} />
+									<img className="img-fluid" alt="img" width="180" src={require(`assets/Images/logo-light.png`)} />
 									:
-									<img className="img-fluid" alt="img" width="100" src={require(`assets/Images/logo-dark.png`)} />
+									<img className="img-fluid" alt="img" width="180" src={require(`assets/Images/logo-dark.png`)} />
 								}
 							</Box>
 							<CustomCard>
 								<form className="login-form text-center">
 									<Typography variant="subtitle2" >Log in to continue to :</Typography>
-									<Typography variant="subtitle2" color="textPrimary" className="fw-500">YesName</Typography>
+									<Typography variant="subtitle2" color="textPrimary" className="fw-500">MoRe</Typography>
 									<Box my={3}>
 										<TextField
 											required

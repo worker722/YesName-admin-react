@@ -188,9 +188,9 @@ class Header extends Component {
 							</Hidden>
 							{openHorizontal ?
 								<div>
-									<Box className="logo-wrap" bgcolor="primary.main" mr={2} py="19px" px={4} lineHeight={0.8}>
+									<Box className="logo-wrap" mr={2} py="19px" px={4} lineHeight={0.8}>
 										<Box component={Link} to="/" display="inline-block" lineHeight={0.8}>
-											<img src={require('assets/Images/logo-light.png')} alt="site-logo" width="95" height="25" />
+											<img src={require('assets/Images/logo-dark.png')} alt="site-logo" width="120" />
 										</Box>
 									</Box>
 								</div>
