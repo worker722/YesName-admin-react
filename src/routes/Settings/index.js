@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';
-import { Paper, Container, Box, Grid, Button, Input, Select, MenuItem } from '@material-ui/core';
+import { Paper, Container, Box, Grid, Button, Input, Select, MenuItem, TextField } from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
 import 'video-react/dist/video-react.css';
 import { Player } from 'video-react';
@@ -29,9 +29,9 @@ const styles = theme => ({
 
 class Settings extends Component {
 	state = {
-		introductionVideo: null,
-		verify_sms: "",
-		invite_sms: "",
+		config: {
+
+		},
 		introduction_video_file: null
 	}
 	componentDidMount() {
@@ -41,15 +41,11 @@ class Settings extends Component {
 		userService.getConfig()
 			.then(res => {
 				if (res.success) {
-					const config = res.config;
-					const introductionVideo = config.find(item => item.key === "introduction").value;
-					const verify_sms = config.find(item => item.key === "verify_sms").value;
-					const invite_sms = config.find(item => item.key === "invite_sms").value;
-					this.setState({
-						introductionVideo,
-						verify_sms,
-						invite_sms,
+					let config = {};
+					res.config.forEach(item => {
+						config[item.key] = item.value;
 					});
+					this.setState({ config });
 				}
 			})
 			.catch(err => {
@@ -63,10 +59,13 @@ class Settings extends Component {
 		let { verify_sms, invite_sms } = this.state;
 		if (type === 0 && !verify_sms?.includes("{code}"))
 			return NotificationManager.error("Verification SMS text must be contains '{code}'");
-		userService.changeConfig(type === 0 ? { verify_sms } : { invite_sms })
+		this.updateConfig(type === 0 ? { verify_sms } : { invite_sms });
+	}
+	updateConfig(data) {
+		userService.changeConfig(data)
 			.then(res => {
 				if (res.success === true) {
-					NotificationManager.success(`Successfully updated the ${type === 0 ? "verification" : "Invite"} SMS`);
+					NotificationManager.success(`Successfully updated config`);
 				}
 			})
 			.catch(err => {
@@ -74,11 +73,11 @@ class Settings extends Component {
 			})
 	}
 	updateVideo() {
-		const { introductionVideo } = this.state;
-		userService.changeConfig({ introduction: introductionVideo })
+		const { config } = this.state;
+		userService.changeConfig({ introduction: config.introduction })
 			.then(res => {
 				if (res.success === true) {
-					NotificationManager.success(`Successfully ${strisnull(introductionVideo) ? "deleted" : "updated"} the introduction video`);
+					NotificationManager.success(`Successfully ${strisnull(config.introduction) ? "deleted" : "updated"} the introduction video`);
 					this.getData();
 				}
 			})
@@ -94,9 +93,9 @@ class Settings extends Component {
 			userService.uploadFile(introduction_video_file)
 				.then(res => {
 					res = res.data;
-					this.setState({
-						introduction_video_file: null,
-						introductionVideo: res.path
+					this.setState({ introduction_video_file: null, });
+					this.configState({
+						introduction: res.path
 					}, () => {
 						this.updateVideo();
 					});
@@ -116,8 +115,8 @@ class Settings extends Component {
 		})
 			.then((willDelete) => {
 				if (willDelete) {
-					this.setState({
-						introductionVideo: null,
+					this.configState({
+						introduction: null,
 					}, () => {
 						this.updateVideo();
 					})
@@ -125,9 +124,27 @@ class Settings extends Component {
 				}
 			});
 	}
+	handleChange(key, event) {
+		this.configState({ [key]: event.target.value });
+	};
+	updateOtherSetting() {
+		let config = this.state.config;
+		delete config.introduction;
+		delete config.verify_sms;
+		delete config.invite_sms;
+		this.updateConfig(config);
+	}
+	configState(item, callback) {
+		this.setState({
+			config: {
+				...this.state.config,
+				...item
+			}
+		}, callback)
+	};
 	render() {
 		const { classes } = this.props;
-		const { introductionVideo, verify_sms, invite_sms, introduction_video_file } = this.state;
+		const { config: { introduction, verify_sms, invite_sms, terms_url, android_link, ios_link, google_map_api_key, tenor_key, admin_contacts, app_version, app_update_date }, introduction_video_file } = this.state;
 		return (
 			<div className="new-dashboard">
 				<Container maxWidth="lg">
@@ -136,11 +153,11 @@ class Settings extends Component {
 							<Grid container spacing={3} >
 								<Grid item xs={12} sm={6} md={4}>
 									<CustomCard title={"Introduction video"} showDivider={true}><br />
-										{strisnull(introductionVideo) ?
+										{strisnull(introduction) ?
 											"Not showing introduction video page on app"
 											:
 											<Player>
-												<source src={getLink(introductionVideo)} />
+												<source src={getLink(introduction)} />
 											</Player>
 										}
 										<br />
@@ -153,18 +170,24 @@ class Settings extends Component {
 											onChange={(e) => this.uploadVideo(e)}
 										/>
 										<Button variant="contained" color="primary" component="span" onClick={this.change_video.bind(this)}> {introduction_video_file ? `Upload file (${introduction_video_file.name})` : "Choose Video"} </Button>
-										{!strisnull(introductionVideo) &&
+										{!strisnull(introduction) &&
 											<Button variant="contained" color="secondary" component="span" style={{ marginLeft: 20 }} onClick={this.removeIntroVideo.bind(this)}> Delete </Button>
 										}
 									</CustomCard>
 								</Grid>
 								<Grid item xs={12} sm={6} md={4}>
 									<CustomCard title={"SMS to verification"} showDivider={true}>
-										<Input rows={8} multiline fullWidth value={verify_sms} onChange={(text) => this.setState({ verify_sms: text.target.value })} /><p style={{ textAlign: "right", color: "red" }}>{'*{code}'}</p>
+										<Input
+											rows={5}
+											multiline
+											fullWidth
+											value={verify_sms}
+											onChange={this.handleChange.bind(this, "verify_sms")}
+										/>
+										<p style={{ textAlign: "right", color: "red" }}>{'*{code}'}</p>
 										<Button variant="contained" color="primary" component="span" onClick={() => this.saveSMS(0)}> Save</Button>
 									</CustomCard>
-								</Grid>
-								<Grid item xs={12} sm={6} md={4}>
+									<br />
 									<CustomCard title={"SMS to Invite user"} showDivider={true}>
 										<Select
 											style={{ width: "100%", marginTop: 4, marginBottom: 3 }}
@@ -177,8 +200,95 @@ class Settings extends Component {
 											<MenuItem value={"{sender name}"}>Sender Name</MenuItem>
 											<MenuItem value={"{sender phone}"}>Sender Phone</MenuItem>
 										</Select>
-										<Input rows={8} multiline fullWidth value={invite_sms} onChange={(text) => this.setState({ invite_sms: text.target.value })} /><p></p>
+										<Input
+											rows={8}
+											multiline
+											fullWidth
+											value={invite_sms}
+											onChange={this.handleChange.bind(this, "invite_sms")}
+										/>
+										<p style={{ textAlign: "right", color: "red" }}>{'*{sender name}, *{sender phone}, *{app link}'}</p>
 										<Button variant="contained" color="primary" component="span" onClick={() => this.saveSMS(1)}> Save</Button>
+									</CustomCard>
+								</Grid>
+								<Grid item xs={12} sm={6} md={4}>
+									<CustomCard title={"Other settings"} showDivider={true} >
+
+										<TextField
+											label="App version"
+											fullWidth
+											margin="normal"
+											value={app_version}
+											InputLabelProps={{ shrink: true, }}
+											onChange={this.handleChange.bind(this, "app_version")}
+										/>
+										<TextField
+											label="App updated date"
+											fullWidth
+											margin="normal"
+											value={app_update_date}
+											InputLabelProps={{ shrink: true, }}
+											onChange={this.handleChange.bind(this, "app_update_date")}
+										/>
+
+										<TextField
+											label="Contacts info"
+											fullWidth
+											margin="normal"
+											value={admin_contacts}
+											InputLabelProps={{ shrink: true, }}
+											onChange={this.handleChange.bind(this, "admin_contacts")}
+										/>
+										<TextField
+											label="Terms and confitions"
+											fullWidth
+											margin="normal"
+											value={terms_url}
+											InputLabelProps={{ shrink: true, }}
+											onChange={this.handleChange.bind(this, "terms_url")}
+										/>
+
+
+										<TextField
+											label="Android app link"
+											fullWidth
+											margin="normal"
+											value={android_link}
+											InputLabelProps={{ shrink: true, }}
+											onChange={this.handleChange.bind(this, "android_link")}
+										/>
+
+
+										<TextField
+											label="iOS app link"
+											fullWidth
+											margin="normal"
+											value={ios_link}
+											InputLabelProps={{ shrink: true, }}
+											onChange={this.handleChange.bind(this, "ios_link")}
+										/>
+
+
+										<TextField
+											label="Google map api key"
+											fullWidth
+											margin="normal"
+											value={google_map_api_key}
+											InputLabelProps={{ shrink: true, }}
+											onChange={this.handleChange.bind(this, "google_map_api_key")}
+										/>
+
+
+										<TextField
+											label="Tenor api key (Gif images)"
+											fullWidth
+											margin="normal"
+											value={tenor_key}
+											InputLabelProps={{ shrink: true, }}
+											onChange={this.handleChange.bind(this, "tenor_key")}
+										/>
+
+										<Button variant="contained" color="primary" component="span" onClick={this.updateOtherSetting.bind(this)}> Save</Button>
 									</CustomCard>
 								</Grid>
 							</Grid>
