@@ -99,7 +99,7 @@ class DynamicDataChart extends Component {
 				</Grid>
 				<Grid container spacing={3} >
 					<Grid item xs={12} sm={12} md={12}>
-						<CustomCard title={"Introduction video"} showDivider={true}>
+						<CustomCard title={"widgets.title"} showDivider={true}>
 							<Grid container spacing={3} >
 								<Grid item xs={12} sm={12} md={7}>
 									<DynamicLineEchart height={'400px'} />
@@ -114,7 +114,7 @@ class DynamicDataChart extends Component {
 															<Box display="block" width="100%">
 																<Box mb={1} display="flex" justifyContent="space-between" alignItems="center">
 																	<Typography variant="body2" color="textPrimary">
-																		{progressData.title}
+																		<IntlMessages id={progressData.title} />
 																	</Typography>
 																	<Box color="primary.main" fontSize="body2.fontSize" textAlign="right">
 																		{progressData.progress}
@@ -137,7 +137,9 @@ class DynamicDataChart extends Component {
 																<Box position="absolute" top={41} left={'38px'} fontSize="subtitle2.fontSize" fontWeight="500">79%</Box>
 															</Box>
 															<Box pt={1} display="flex" justifyContent="center" alignItems="center">
-																<Box fontWeight="500" fontSize="subtitle1.fontSize">Server Load</Box>
+																<Box fontWeight="500" fontSize="subtitle1.fontSize">
+																	<IntlMessages id={"Server Load"} />
+																</Box>
 																<Box color="success.main" pl={1} className="server-icon fas fa-caret-up"></Box>
 															</Box>
 														</Box>
@@ -151,7 +153,9 @@ class DynamicDataChart extends Component {
 																<Box fontWeight="500" position="absolute" top={41} left={'38px'} fontSize="subtitle2.fontSize">79%</Box>
 															</Box>
 															<Box pt={1} display="flex" justifyContent="center" alignItems="center">
-																<Box fontWeight="500" fontSize="subtitle1.fontSize">Server Load</Box>
+																<Box fontWeight="500" fontSize="subtitle1.fontSize">
+																	<IntlMessages id={"Server Load"} />
+																</Box>
 																<Box color="success.main" pl={1} className="server-icon fas fa-caret-up"></Box>
 															</Box>
 														</Box>

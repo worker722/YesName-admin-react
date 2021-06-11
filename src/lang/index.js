@@ -5,14 +5,14 @@
 import { addLocaleData } from 'react-intl';
 
 import enLang from './entries/en-US';
-import frLang from './entries/fr_FR';
+import deLang from './entries/DE-CH';
 
 const AppLocale = {
    en: enLang,
-   fr: frLang,
+   de: deLang,
 };
 
 addLocaleData(AppLocale.en.data);
-addLocaleData(AppLocale.fr.data);
+addLocaleData(AppLocale.de.data);
 
 export default AppLocale;

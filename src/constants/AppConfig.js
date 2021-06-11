@@ -2,7 +2,7 @@
  * App Config File
 */
 const DEBUGGING = false;
-const PRODUCTION = true;
+const PRODUCTION = false;
 
 const AppConfig = {
 	brandName: 'MoRe',
@@ -17,10 +17,10 @@ const AppConfig = {
 	isMiniSidebarActive: false,
 	selectedThemeColor: 'light-theme',
 	locale: {
-		languageId: 'english',
-		locale: 'en',
-		name: 'English',
-		icon: 'usa.png',
+	   languageId: 'germany',
+	   locale: 'de',
+	   name: 'GerMany',
+	   icon: 'germany.png',
 	},
 	// Default Theme Colors 
 	lightThemeColors: {

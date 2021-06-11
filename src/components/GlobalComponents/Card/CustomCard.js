@@ -3,6 +3,7 @@
  */
 import React, { Fragment } from 'react';
 import { Card, CardContent, Typography, makeStyles, Divider } from "@material-ui/core"
+import IntlMessages from 'util/IntlMessages';
 
 const useStyles = makeStyles(theme => ({
 	card: {
@@ -25,9 +26,7 @@ function CustomCard(props) {
 		<Card className={`${classes.card} ${props.cardClasses ? props.cardClasses : ''}`}>
 			<Fragment>
 				{props.title ?
-					<Typography variant="h6">
-						{props.title}
-					</Typography>
+					<Typography variant="h6"><IntlMessages id={props.title} /></Typography>
 					:
 					null
 				}

@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { Box, Switch } from '@material-ui/core';
 import ReactEcharts from 'echarts-for-react';
 import 'echarts/lib/chart/line';
+import IntlMessages from 'util/IntlMessages';
 
 import { withTheme } from '@material-ui/core/styles';
 
@@ -27,31 +28,31 @@ var oneDay = 24 * 3600 * 1000;
 var value = Math.random() * 1000;
 
 for (var i = 0; i < 500; i++) {
-   data.push(randomData());
+	data.push(randomData());
 }
 
 class DynamicLineEchart extends Component {
-	state={
+	state = {
 		chartData: data,
 		checkedA: true
 	}
 
-	componentDidMount(){
-		this.changeData = setInterval(()=> this.changeDataFn(), 100);
+	componentDidMount() {
+		this.changeData = setInterval(() => this.changeDataFn(), 100);
 	}
 
-	componentWillUnmount(){
+	componentWillUnmount() {
 		clearInterval(this.changeData)
 	}
 
-	changeDataFn(){
-		if(this.state.checkedA){
-		for (var i = 0; i < 5; i++) {
+	changeDataFn() {
+		if (this.state.checkedA) {
+			for (var i = 0; i < 5; i++) {
 				data.shift();
-				data.push(randomData())				
+				data.push(randomData())
 			}
 			this.setState({
-				chartData: data 
+				chartData: data
 			})
 		}
 	}
@@ -66,25 +67,25 @@ class DynamicLineEchart extends Component {
 	getOptions() {
 		const option = {
 			tooltip: {
-					trigger: 'axis',
-					formatter: function (params) {
-						params = params[0];
-						var date = new Date(params.name);
-						return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
-					},
-					axisPointer: {
-						animation: false
-					}
+				trigger: 'axis',
+				formatter: function (params) {
+					params = params[0];
+					var date = new Date(params.name);
+					return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+				},
+				axisPointer: {
+					animation: false
+				}
 			},
 			xAxis: {
 				type: 'time',
 				splitLine: {
-				show: false
+					show: false
 				},
 				axisLine: {
 					show: true,
 					lineStyle: {
-						color:'rgba(0, 0, 0, 0.4)',
+						color: 'rgba(0, 0, 0, 0.4)',
 					}
 				},
 			},
@@ -94,7 +95,7 @@ class DynamicLineEchart extends Component {
 				axisLine: {
 					show: true,
 					lineStyle: {
-						color:'rgba(0, 0, 0, 0.4)',
+						color: 'rgba(0, 0, 0, 0.4)',
 					}
 				},
 				splitLine: {
@@ -102,7 +103,7 @@ class DynamicLineEchart extends Component {
 				}
 			},
 			grid: {
-				top:'2%',
+				top: '2%',
 				left: '6%',
 				right: '2%',
 				bottom: '5%',
@@ -111,33 +112,35 @@ class DynamicLineEchart extends Component {
 				name: 'Data',
 				type: 'line',
 				showSymbol: false,
-				symbolSize:0,
+				symbolSize: 0,
 				hoverAnimation: false,
-				areaStyle: {color: this.props.theme.palette.primary.light},
-				lineStyle: {color: this.props.theme.palette.primary.main	},
+				areaStyle: { color: this.props.theme.palette.primary.light },
+				lineStyle: { color: this.props.theme.palette.primary.main },
 				data: this.state.chartData
 			}]
 		}
 		return option;
-		}    
+	}
 
 	render() {
 		const { height } = this.props
 		return (
 			<div>
 				<Box display="flex" justifyContent="flex-end" alignItems="center" py={3}>
-					<Switch 
+					<Switch
 						color="primary"
 						size="small"
 						checked={this.state.checkedA}
-						className="switch-V2" 
+						className="switch-V2"
 						onClick={() => this.handleChange(this.state.checkedA)}
 					/>
-					<Box component="span" fontSize="subtitle2.fontSize" ml={1}>Live Data</Box>
+					<Box component="span" fontSize="subtitle2.fontSize" ml={1}>
+						<IntlMessages id={"Live Data"} />
+					</Box>
 				</Box>
-				<ReactEcharts 
-					option={this.getOptions()} 
-					style={{height:`${height}`, width: '100%'}}
+				<ReactEcharts
+					option={this.getOptions()}
+					style={{ height: `${height}`, width: '100%' }}
 				/>
 			</div>
 		);

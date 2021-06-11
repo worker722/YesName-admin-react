@@ -47,13 +47,13 @@ class Dashboard extends Component {
 			{
 				icon: 'supervised_user_circle',
 				iconColor: 'text-primary',
-				title: 'Allowed users',
+				title: 'widgets.allowedUsers',
 				count: users.filter(item => item.state === 1).length
 			},
 			{
 				icon: 'shopping_cart',
 				iconColor: 'text-success',
-				title: 'Blocked users',
+				title: 'widgets.blockedUsers',
 				count: users.filter(item => item.state === 2).length
 			}
 		];

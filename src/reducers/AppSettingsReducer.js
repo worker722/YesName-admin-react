@@ -32,18 +32,18 @@ const INITIAL_STATE = {
          name: 'English',
          icon: 'usa.png',
       },
-      {
-         languageId: 'french',
-         locale: 'fr',
-         name: 'French',
-         icon: 'france.png',
-      },
       // {
-      //    languageId: 'germany',
-      //    locale: 'gm',
-      //    name: 'GerMany',
-      //    icon: 'germany.png',
+      //    languageId: 'french',
+      //    locale: 'fr',
+      //    name: 'French',
+      //    icon: 'france.png',
       // },
+      {
+         languageId: 'germany',
+         locale: 'de',
+         name: 'GerMany',
+         icon: 'germany.png',
+      },
 	],
 	notificationSidebar: false
 }
