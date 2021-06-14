@@ -113,28 +113,28 @@ class HulkAppLayout extends Component {
 
 	componentDidMount() {
 		setTimeout(() => {
-			if (this.state.loading === false && this.props.location.pathname === '/' ) {
+			if (this.state.loading === false && this.props.location.pathname === '/') {
 				document.getElementsByClassName("hulk-page-content")[0].classList.add('fadeInUpShorter');
 				setTimeout(() => {
 					document.getElementsByClassName("hulk-page-content")[0].classList.remove('fadeInUpShorter');
 				}, 1500)
 			}
 		}, 2500)
-		const { isDarkModeActive, isRtlActive, isHorizontalMenuActive ,isMiniSidebarActive, selectedThemeColor } = this.props.settings;
-		if ( this.props.location.search === '?darkmode=true&horizontalmenu=true' || this.props.location.search === '?horizontalmenu=true&darkmode=true'){
+		const { isDarkModeActive, isRtlActive, isHorizontalMenuActive, isMiniSidebarActive, selectedThemeColor } = this.props.settings;
+		if (this.props.location.search === '?darkmode=true&horizontalmenu=true' || this.props.location.search === '?horizontalmenu=true&darkmode=true') {
 			this.onToggleHorizontalMenu(true);
 			this.onToggleDarkMode(true);
 		}
-		if( this.props.location.search === '?horizontalmenu=true' || isHorizontalMenuActive){
+		if (this.props.location.search === '?horizontalmenu=true' || isHorizontalMenuActive) {
 			this.onToggleHorizontalMenu(true);
 		}
 		if (this.props.location.search === '?darkmode=true' || isDarkModeActive) {
 			this.onToggleDarkMode(true);
 		}
-		if ( this.props.location.search === '?rtl=true' || isRtlActive) {
+		if (this.props.location.search === '?rtl=true' || isRtlActive) {
 			this.onToggleRtl(true);
 		}
-		if( this.props.location.search === '?minisidebar=true' || isMiniSidebarActive ){
+		if (this.props.location.search === '?minisidebar=true' || isMiniSidebarActive) {
 			this.onToggleMiniSidebar(true);
 		}
 		if (selectedThemeColor) {
@@ -150,13 +150,13 @@ class HulkAppLayout extends Component {
 				document.getElementsByClassName("hulk-page-content")[0].classList.remove('fadeInUpShorter');
 			}, 1500)
 		}
-		if(this.state.loading === true){
+		if (this.state.loading === true) {
 			setTimeout(() => {
 				this.setState({ loading: false });
 			}, 1500)
 		}
 	}
-	
+
 	//Scrollbar height
 	getScrollBarStyle() {
 		if (this.props.settings.isHorizontalMenuActive) {
@@ -241,25 +241,21 @@ class HulkAppLayout extends Component {
 
 	render() {
 		const { classes } = this.props;
-		const { navCollapsed, isDarkModeActive, isMiniSidebarActive, isHorizontalMenuActive } = this.props.settings;
+		const { navCollapsed, isMiniSidebarActive, isHorizontalMenuActive } = this.props.settings;
 		return (
 			<div>
-				{ this.state.loading === true ? 
+				{this.state.loading === true ?
 					<div id="loading-bg" className="hk-full-loader" >
 						<div className="text-center">
 							<Box mb={3}>
-								{isDarkModeActive ?
-									<img alt="site-logo" width="180"  src={require(`assets/Images/logo-light.png`)} />
-									:
-									<img alt="site-logo" width="180"  src={require(`assets/Images/logo-dark.png`)} />
-								}
+								<img alt="site-logo" width="180" src={require(`assets/Images/logo.png`)} />
 							</Box>
 							<CircularProgress />
 						</div>
 					</div>
-					:		
+					:
 					<Fragment>
-						{ isMiniSidebarActive === false ?
+						{isMiniSidebarActive === false ?
 							// Layout One
 							<div className={`hk-app-layout ${classes.root}`}>
 								<Header
@@ -267,7 +263,7 @@ class HulkAppLayout extends Component {
 									open={navCollapsed}
 									toggleSidebar={(e) => this.onToggleNavCollapsed(e)}
 									openHorizontal={isHorizontalMenuActive}
-								/>								
+								/>
 								<nav aria-label="menu-sidebar">
 									{/* The implementation can be swapped with js to avoid SEO duplication of links. */}
 									<Hidden lgUp implementation="css">
@@ -318,63 +314,63 @@ class HulkAppLayout extends Component {
 							:
 							<div className={`hk-icon-layout ${classes.root}`}>
 								<Fragment>
-																				
-										<nav aria-label="menu-sidebar" className="icon-sidebar">
-											{/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-											<Hidden lgUp implementation="css">
-												<Drawer
-													variant="temporary"
-													anchor='left'
-													open={this.state.mobileOpen}
-													onClose={this.handleDrawerToggle}
-													classes={{
-														paper: `${classes.bgColor} ${classes.drawer}`,
-													}}
-													ModalProps={{
-														keepMounted: true, // Better open performance on mobile.
-													}}
-												>
-													<div>
-														<Sidebar closeSidebar={this.handleDrawerToggle} />
-													</div>
-												</Drawer>
-											</Hidden>
-											<Hidden mdDown implementation="css" className={`icon-drawer ${classes.drawer}`}>
-												<Drawer
-													variant="persistent"
-													anchor="left"
-													open={navCollapsed}
-													classes={{ paper: classes.drawerPaper, }}
-												>
-													<IconSidebar />
-												</Drawer>
-											</Hidden>
-										</nav>
-										<main
-											className={clsx(classes.content, {
-												[classes.contentShift]: navCollapsed,
-											}, 'hk-main')}
-										>
-											<Box className="icon-header-layout">
-												<Header
-													toggleResponsiveSidebar={this.handleDrawerToggle}
-													open={navCollapsed}
-													toggleSidebar={(e) => this.onToggleNavCollapsed(e)}
-													openHorizontal={isHorizontalMenuActive}
-												/>
-											</Box>
-											<div className="hk-page">
-												{this.renderPage()}
-											</div>
-										</main>
-									</Fragment>
-							</div>	
+
+									<nav aria-label="menu-sidebar" className="icon-sidebar">
+										{/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+										<Hidden lgUp implementation="css">
+											<Drawer
+												variant="temporary"
+												anchor='left'
+												open={this.state.mobileOpen}
+												onClose={this.handleDrawerToggle}
+												classes={{
+													paper: `${classes.bgColor} ${classes.drawer}`,
+												}}
+												ModalProps={{
+													keepMounted: true, // Better open performance on mobile.
+												}}
+											>
+												<div>
+													<Sidebar closeSidebar={this.handleDrawerToggle} />
+												</div>
+											</Drawer>
+										</Hidden>
+										<Hidden mdDown implementation="css" className={`icon-drawer ${classes.drawer}`}>
+											<Drawer
+												variant="persistent"
+												anchor="left"
+												open={navCollapsed}
+												classes={{ paper: classes.drawerPaper, }}
+											>
+												<IconSidebar />
+											</Drawer>
+										</Hidden>
+									</nav>
+									<main
+										className={clsx(classes.content, {
+											[classes.contentShift]: navCollapsed,
+										}, 'hk-main')}
+									>
+										<Box className="icon-header-layout">
+											<Header
+												toggleResponsiveSidebar={this.handleDrawerToggle}
+												open={navCollapsed}
+												toggleSidebar={(e) => this.onToggleNavCollapsed(e)}
+												openHorizontal={isHorizontalMenuActive}
+											/>
+										</Box>
+										<div className="hk-page">
+											{this.renderPage()}
+										</div>
+									</main>
+								</Fragment>
+							</div>
 						}
 					</Fragment>
 				}
 			</div>
 		);
-	}		
+	}
 }
 
 // map state to props

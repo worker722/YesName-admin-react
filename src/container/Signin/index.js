@@ -86,18 +86,14 @@ class Signin extends Component {
 
 	render() {
 		const { blankEmail, blankPassword, invalidEmail } = this.state.formErrors;
-		const { email, password, error, isDarkModeActive } = this.props;
+		const { email, password, error } = this.props;
 		return (
 			<div>
 				<div className="session-wrapper session-wrapper-v2">
 					<Box className="session-box" mx="auto" display="flex" justifyContent="center" alignItems="center">
 						<Box width="100%">
 							<Box textAlign="center" className="session-logo" >
-								{isDarkModeActive ?
-									<img className="img-fluid" alt="img" width="180" src={require(`assets/Images/logo-light.png`)} />
-									:
-									<img className="img-fluid" alt="img" width="180" src={require(`assets/Images/logo-dark.png`)} />
-								}
+								<img className="img-fluid" alt="img" width="180" src={require(`assets/Images/logo.png`)} />
 							</Box>
 							<CustomCard>
 								<form className="login-form text-center">

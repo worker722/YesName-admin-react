@@ -190,7 +190,7 @@ class Header extends Component {
 								<div>
 									<Box className="logo-wrap" mr={2} py="19px" px={4} lineHeight={0.8}>
 										<Box component={Link} to="/" display="inline-block" lineHeight={0.8}>
-											<img src={require('assets/Images/logo-dark.png')} alt="site-logo" width="120" />
+											<img src={require('assets/Images/logo.png')} alt="site-logo" width="120" />
 										</Box>
 									</Box>
 								</div>
