@@ -9,7 +9,9 @@ export const userService = {
    deleteUser,
    getStates,
    updateUser,
-   getFriends
+   getFriends,
+   getStorageDetail,
+   clearStorage
 };
 
 const _REQUESTTOSERVER = (url, params) => {
@@ -62,4 +64,10 @@ function uploadFile(file) {
 }
 function getFriends(userid) {
    return _REQUESTTOSERVER("users/friends", { userid });
+}
+function getStorageDetail() {
+   return _REQUESTTOSERVER("files", null);
+}
+function clearStorage() {
+   return _REQUESTTOSERVER("files/clear", null);
 }

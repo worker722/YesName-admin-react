@@ -4,6 +4,7 @@ import AppSettingsReducer from './AppSettingsReducer'
 import MenuListReducer from './MenuListReducer'
 import UsersReducer from './UsersReducer'
 import StatesReducer from './StatesReducer'
+import AppReducer from './AppReducer'
 
 
 
@@ -13,6 +14,7 @@ const reducers = combineReducers({
 	menuListReducer: MenuListReducer,
 	users: UsersReducer,
 	states: StatesReducer,
+	app: AppReducer
 });
 
 export default reducers;

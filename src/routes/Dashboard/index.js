@@ -6,9 +6,11 @@ import { withStyles } from '@material-ui/styles';
 import { Paper, Container, Box } from '@material-ui/core';
 import DynamicDataChart from 'components/Widgets/DynamicDataChart';
 import { withTheme } from '@material-ui/core/styles';
-import { getUsers } from 'actions';
+import { getUsers, getStorageDetail } from 'actions';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import { userService } from "../../_services";
+import { NotificationManager } from 'react-notifications';
 
 const styles = theme => ({
 	Paper: {
@@ -30,7 +32,30 @@ const styles = theme => ({
 class Dashboard extends Component {
 
 	componentDidMount() {
+		this.refresh();
+	}
+	refresh() {
 		this.props.getUsers();
+		this.props.getStorageDetail();
+	}
+	getProgressData() {
+		let { app: { storageInfo } } = this.props;
+		const usedpace = (storageInfo.files * 100 / storageInfo.size).toFixed(2);
+		const freespace = (storageInfo.free * 100 / storageInfo.size).toFixed(2);
+		return [
+			{
+				id: 1,
+				title: `Free space ${storageInfo?.str?.free || ''}`,
+				progress: `${freespace}%`,
+				value: freespace
+			},
+			{
+				id: 1,
+				title: `Storage size ${storageInfo?.str?.files || ''}`,
+				progress: `${usedpace}%`,
+				value: usedpace
+			},
+		]
 	}
 	getStats() {
 		let { users: { users } } = this.props;
@@ -58,6 +83,16 @@ class Dashboard extends Component {
 			}
 		];
 	}
+	clearStorage() {
+		userService.clearStorage()
+			.then(res => {
+				NotificationManager.success(`${res.size} cleaned`);
+				this.refresh();
+			})
+			.catch(err => {
+				NotificationManager.error("Something went wrong" + err);
+			})
+	}
 	render() {
 		const { classes } = this.props;
 		return (
@@ -65,7 +100,7 @@ class Dashboard extends Component {
 				<Container maxWidth="lg">
 					<Box pt={3}>
 						<Paper className={classes.Paper} square >
-							<DynamicDataChart stats={this.getStats()} />
+							<DynamicDataChart stats={this.getStats()} progressData={this.getProgressData()} clearStorage={this.clearStorage.bind(this)} />
 						</Paper>
 					</Box>
 				</Container>
@@ -74,7 +109,7 @@ class Dashboard extends Component {
 	}
 }
 
-const mapStateToProps = ({ users }) => {
-	return { users }
+const mapStateToProps = ({ users, app }) => {
+	return { users, app }
 }
-export default withRouter(connect(mapStateToProps, { getUsers })(withStyles(styles)(withTheme(Dashboard))));
+export default withRouter(connect(mapStateToProps, { getUsers, getStorageDetail })(withStyles(styles)(withTheme(Dashboard))));

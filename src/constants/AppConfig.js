@@ -2,7 +2,7 @@
  * App Config File
 */
 const DEBUGGING = false;
-const PRODUCTION = false;
+const PRODUCTION = true;
 
 const AppConfig = {
 	brandName: 'MoRe',

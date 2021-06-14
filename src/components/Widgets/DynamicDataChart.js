@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';
-import { Grid, Box, LinearProgress, CircularProgress, List, Card, ListItem, Typography } from '@material-ui/core';
+import { Grid, Box, LinearProgress, Button, CircularProgress, List, Card, ListItem, Typography } from '@material-ui/core';
 
 import IntlMessages from 'util/IntlMessages';
 import DynamicLineEchart from 'components/GlobalComponents/Charts/DynamicLineEchart';
@@ -48,26 +48,7 @@ const styles = theme => ({
 class DynamicDataChart extends Component {
 	state = {
 		stats: this.props.stats,
-		progressData: [
-			{
-				id: 1,
-				title: "Recent Orders",
-				progress: "79%",
-				value: 79
-			},
-			{
-				id: 2,
-				title: "Stock Exchange",
-				progress: "50%",
-				value: 65
-			},
-			{
-				id: 3,
-				title: "Net Profit",
-				progress: "80%",
-				value: 30
-			}
-		]
+		progressData: this.props.progressData,
 	}
 
 	render() {
@@ -129,7 +110,7 @@ class DynamicDataChart extends Component {
 										</Box>
 										<Box p="12px" mb="20px">
 											<Grid container spacing={3} >
-												<Grid item xs={12} sm={6} md={6}>
+												{/* <Grid item xs={12} sm={6} md={6}>
 													<Card>
 														<Box px={2} py={3} textAlign="center">
 															<Box position="relative" display="inline-block">
@@ -160,10 +141,11 @@ class DynamicDataChart extends Component {
 															</Box>
 														</Box>
 													</Card>
-												</Grid>
+												</Grid> */}
 											</Grid>
 										</Box>
 										<Box mb={2} className="btn-group { classes.btnWrap}" textAlign="center">
+											<Button variant="outlined" className="primary-bg-btn" color="primary"  size="large" onClick={this.props.clearStorage}>Clean storage</Button>
 											{/* <Button variant="outlined" className="primary-bg-btn" color="primary"  size="large" >Generate PDF</Button> */}
 											{/* <Button variant="outlined" className="primary-bg-btn" color="primary" size="large">Report Bug</Button> */}
 										</Box>
