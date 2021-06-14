@@ -51,7 +51,7 @@ class Dashboard extends Component {
 			},
 			{
 				id: 1,
-				title: `Storage size ${storageInfo?.str?.files || ''}`,
+				title: `MoRe used space ${storageInfo?.str?.files || ''}`,
 				progress: `${usedpace}%`,
 				value: usedpace
 			},

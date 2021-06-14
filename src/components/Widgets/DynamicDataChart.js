@@ -52,8 +52,7 @@ class DynamicDataChart extends Component {
 	}
 
 	render() {
-		const { classes } = this.props;
-		const { progressData, stats } = this.state;
+		const { classes, progressData, stats } = this.props;
 		return (
 			<div className="dynamic-chart-wrap">
 				<Grid container spacing={3} className="welcome-stat">
