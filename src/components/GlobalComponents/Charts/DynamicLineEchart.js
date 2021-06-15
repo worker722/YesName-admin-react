@@ -27,9 +27,9 @@ var now = +new Date(1997, 9, 3);
 var oneDay = 24 * 3600 * 1000;
 var value = Math.random() * 1000;
 
-for (var i = 0; i < 500; i++) {
-	data.push(randomData());
-}
+// for (var i = 0; i < 500; i++) {
+// 	data.push(randomData());
+// }
 
 class DynamicLineEchart extends Component {
 	state = {
@@ -48,7 +48,9 @@ class DynamicLineEchart extends Component {
 	changeDataFn() {
 		if (this.state.checkedA) {
 			for (var i = 0; i < 5; i++) {
-				data.shift();
+				if(data.length >= 500){
+					data.shift();
+				}
 				data.push(randomData())
 			}
 			this.setState({
@@ -74,7 +76,7 @@ class DynamicLineEchart extends Component {
 					return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
 				},
 				axisPointer: {
-					animation: false
+					animation: true
 				}
 			},
 			xAxis: {
@@ -113,7 +115,7 @@ class DynamicLineEchart extends Component {
 				type: 'line',
 				showSymbol: false,
 				symbolSize: 0,
-				hoverAnimation: false,
+				hoverAnimation: true,
 				areaStyle: { color: this.props.theme.palette.primary.light },
 				lineStyle: { color: this.props.theme.palette.primary.main },
 				data: this.state.chartData
@@ -137,7 +139,7 @@ class DynamicLineEchart extends Component {
 					<Box component="span" fontSize="subtitle2.fontSize" ml={1}>
 						<IntlMessages id={"Live Data"} />
 					</Box>
-				</Box>
+				</Box> 
 				<ReactEcharts
 					option={this.getOptions()}
 					style={{ height: `${height}`, width: '100%' }}

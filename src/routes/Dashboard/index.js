@@ -33,9 +33,11 @@ class Dashboard extends Component {
 
 	componentDidMount() {
 		this.refresh();
+		setInterval(() => {
+			this.props.getUsers();
+		}, 5000)
 	}
 	refresh() {
-		this.props.getUsers();
 		this.props.getStorageDetail();
 	}
 	getProgressData() {
@@ -58,28 +60,34 @@ class Dashboard extends Component {
 		]
 	}
 	getStats() {
-		let { users: { users } } = this.props;
+		let { users: { users, connectedUser } } = this.props;
 		if (!users) {
 			users = [];
 		}
 		return [
 			{
 				icon: 'supervised_user_circle',
-				iconColor: 'text-danger',
+				iconColor: 'text-primary',
 				title: 'widgets.totalUsers',
 				count: users.length
 			},
 			{
-				icon: 'supervised_user_circle',
-				iconColor: 'text-primary',
+				icon: 'phonelink_ring',
+				iconColor: 'text-secondary',
 				title: 'widgets.allowedUsers',
 				count: users.filter(item => item.state === 1).length
 			},
 			{
-				icon: 'shopping_cart',
-				iconColor: 'text-success',
+				icon: 'app_blocking',
+				iconColor: 'text-danger',
 				title: 'widgets.blockedUsers',
 				count: users.filter(item => item.state === 2).length
+			},
+			{
+				icon: 'settings_input_antenna',
+				iconColor: 'text-success',
+				title: 'widgets.connectedUsers',
+				count: connectedUser?.length || 0
 			}
 		];
 	}

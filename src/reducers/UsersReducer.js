@@ -16,6 +16,7 @@ const INITIAL_STATE = {
    loading: false,
    userid: 0,
    friends: [],
+   connectedUser: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -23,7 +24,7 @@ export default (state = INITIAL_STATE, action) => {
       case GETUSERS:
          return { ...state, loading: true, userid: 0 };
       case GETUSERS_SUCCESS:
-         return { ...state, loading: false, users: action.payload };
+         return { ...state, loading: false, users: action.payload.users, connectedUser: action.payload.connected };
       case GETUSERS_FAILED:
          return { ...state, loading: false, users: [] };
 

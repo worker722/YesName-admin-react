@@ -16,7 +16,7 @@ export const getUsers = () => (dispatch) => {
     userService.getUsers()
         .then(res => {
             if (res.success === true) {
-                getUserSuccess(dispatch, res.users);
+                getUserSuccess(dispatch, res);
             } else {
                 getUserFailure(dispatch, res);
             }
@@ -35,10 +35,10 @@ export const getUsers = () => (dispatch) => {
 /**
  * Function to check Login user success 
  */
-function getUserSuccess(dispatch, users) {
+function getUserSuccess(dispatch, payload) {
     dispatch({
         type: GETUSERS_SUCCESS,
-        payload: users
+        payload
     });
 }
 

@@ -58,7 +58,7 @@ class DynamicDataChart extends Component {
 				<Grid container spacing={3} className="welcome-stat">
 					{
 						stats.map((data, i) => (
-							<Grid item xs={12} sm={12} md={4} key={i}>
+							<Grid item xs={12} sm={12} md={3} key={i}>
 								<CustomCard>
 									<Box display="flex" justifyContent="space-between" alignItems="center">
 										<Box display="flex" alignItems="center">

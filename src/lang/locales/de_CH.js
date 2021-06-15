@@ -9,6 +9,7 @@ export default {
     "widgets.totalUsers":"Gesamtnutzer",
     "widgets.allowedUsers":"Zugelassene Benutzer",
     "widgets.blockedUsers":"Blockierte Benutzer",
+    "widgets.connectedUsers":"Verbundene Benutzer",
     "widgets.title":"MomentReaction Messenger",
     "Recent Orders":"letzte Bestellungen",
     "Stock Exchange":"Börse",
