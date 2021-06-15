@@ -152,7 +152,7 @@ class Users extends Component {
 				<Container maxWidth="lg">
 					<Box pt={3}>
 						<UsersTable
-							data={users.userid > 0 ? users.friends : users.users}
+							data={users?.users?.map(item => ({ ...item, connected: users.connectedUser.find(usr => usr.userid === item.id) }))}
 							loading={users.loading}
 							onEdit={this.onEdit.bind(this)}
 							selected_user={this.selected_user()}
