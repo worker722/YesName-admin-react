@@ -26,5 +26,12 @@
 		"icon": "image",
 		"isMenuOpen": false,
 		"child_routes": null
+	},
+	{
+		"menu_title": "sidebar.chat",
+		"path": "/app/chat",
+		"icon": "chat",
+		"isMenuOpen": false,
+		"child_routes": null
 	}
 ]

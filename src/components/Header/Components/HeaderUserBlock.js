@@ -104,7 +104,7 @@ class HeaderUserBlock extends Component {
 										<Avatar alt="user-thumb" className={classes.large} src={user?.avatar} />
 										<Typography variant="body2">{user?.name}</Typography>
 										<Typography variant="subtitle2">{user?.phone}</Typography>
-										<Button className="btn primary-bg-btn" component={Link} to="/app/user-settings" variant="outlined" color="primary">
+										<Button className="btn primary-bg-btn" component={Link} to="/app/profile" variant="outlined" color="primary">
 											Manage your account
 										</Button>
 									</div>

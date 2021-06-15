@@ -5,6 +5,8 @@ export default {
 	"sidebar.fullpagemenu" : "Full Page Menu",
    "sidebar.videoPlayer" : "Video Player",
    "sidebar.stories": "Stories",
+   "sidebar.chat": "Chat",
+   "sidebar.usersettings":"User Settings",
    "widgets.users":"Users",
    "widgets.totalUsers":"Total Users",
    "widgets.allowedUsers":"Allowed users",
@@ -15,5 +17,10 @@ export default {
    "Stock Exchange":"Stock Exchange",
    "Net Profit":"Net Profit",
    "Server Load":"Server Load",
-   "Live Data":"Live Data"
+   "Live Data":"Live Data",
+   "component.settings":"Settings",
+   "component.general":"General",
+   "component.account":"Account",
+   "component.email":"Email",
+   "component.stories":"Stories"
 }

@@ -1,15 +1,15 @@
 /**
  * Dynamic Data Widget
  */
-import React, { Component } from 'react';
+import { Box, Button, Grid, LinearProgress, List, ListItem, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
-import { Grid, Box, LinearProgress, Button, CircularProgress, List, Card, ListItem, Typography } from '@material-ui/core';
-
-import IntlMessages from 'util/IntlMessages';
-import DynamicLineEchart from 'components/GlobalComponents/Charts/DynamicLineEchart';
-
 // Component
 import { CustomCard } from 'components/GlobalComponents';
+import DynamicLineEchart from 'components/GlobalComponents/Charts/DynamicLineEchart';
+import React, { Component } from 'react';
+import IntlMessages from 'util/IntlMessages';
+
+
 
 const styles = theme => ({
 	listItems: {

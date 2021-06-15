@@ -15,6 +15,14 @@
 		{
 			"name": "Stories",
 			"url": "/app/stories"
+		},
+		{
+			"name": "Profile Settings",
+			"url": "/app/profile"
+		},
+		{
+			"name": "Chat",
+			"url": "/app/chat"
 		}
 	]
 }

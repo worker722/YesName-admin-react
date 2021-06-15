@@ -5,7 +5,7 @@ import MenuListReducer from './MenuListReducer'
 import UsersReducer from './UsersReducer'
 import StatesReducer from './StatesReducer'
 import AppReducer from './AppReducer'
-
+import ChatAppReducer from './ChatAppReducer';
 
 
 const reducers = combineReducers({
@@ -14,6 +14,7 @@ const reducers = combineReducers({
 	menuListReducer: MenuListReducer,
 	users: UsersReducer,
 	states: StatesReducer,
+	chatAppReducer: ChatAppReducer,
 	app: AppReducer
 });
 

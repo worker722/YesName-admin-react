@@ -47,6 +47,18 @@
 			"desc": true,
 			"content": "User Stories",
 			"child_routes": null
+		},
+		{
+			"menu_title": "sidebar.chat",
+			"path": "/app/chat",
+			"icon": "chat",
+			"category": "general",
+			"menu": "chat",
+			"fullPageMenu": false,
+			"isMenuOpen": true,
+			"desc": true,
+			"content": "Chat",
+			"child_routes": null
 		}
 	]
 }

@@ -1,22 +1,24 @@
 /**
  * Custom Table Widget
 */
-import React, { Component } from "react";
-import MaterialTable from "material-table";
-import { withStyles } from '@material-ui/styles';
-import { Grid, Box, Typography, Avatar, Tooltip, IconButton, Button } from '@material-ui/core';
-import { Clear as ClearIcon } from '@material-ui/icons';
-import swal from 'sweetalert';
+import { Avatar, Badge, Box, Button, Grid, IconButton, Tooltip } from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
-
-import IntlMessages from 'util/IntlMessages';
-import { getLink, date2str } from "helpers";
+import { Clear as ClearIcon } from '@material-ui/icons';
+import { withStyles } from '@material-ui/styles';
+import { getFriends, getUsers } from 'actions';
 // Components
 import { CustomCard } from 'components/GlobalComponents';
-import { userService } from "../../_services";
+import { date2str, getLink } from "helpers";
+import MaterialTable from "material-table";
+import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { getUsers, getFriends } from 'actions';
+import swal from 'sweetalert';
+import IntlMessages from 'util/IntlMessages';
+import { userService } from "../../_services";
+
+
+
 const styles = theme => ({
 	root: {
 		'& .MuiTableCell-paddingNone': {
@@ -32,14 +34,39 @@ const styles = theme => ({
 				fontFamily: "'Roboto', sans-serif",
 				fontWeight: 500,
 			}
+		},
+		'& .MuiBadge-dot': {
+			height: 14,
+			width: 14,
+			borderRadius: '50%'
 		}
 	},
+	customBadge: {
+		backgroundColor: "#44b700",
+	}
 });
 
 class UsersTable extends Component {
 	state = {
 		columns: [
-			{ title: 'Avatar', field: 'avatar', render: rowData => <Avatar alt={rowData.name?.toUpperCase()} className="img-60 bdr-rad-60" src={getLink(rowData.avatar)} /> },
+			{
+				title: 'Avatar', field: 'avatar', render: rowData => (
+					<>
+						<Badge
+							overlap="circle"
+							anchorOrigin={{
+								vertical: 'bottom',
+								horizontal: 'right',
+							}}
+							color={"secondary"}
+							classes={rowData.connected && { badge: this.props.classes.customBadge }}
+							variant="dot"
+						>
+							<Avatar alt={rowData.name?.toUpperCase()} src={getLink(rowData.avatar)} />
+						</Badge>
+					</>
+				)
+			},
 			{ title: 'Name', field: 'name' },
 			{ title: 'Phone number', field: 'phone' },
 			{ title: 'Active', field: 'active', render: rowData => rowData.active === 0 ? "No Verifed" : rowData.active === 1 ? "Active" : rowData.active === 2 ? "Blocked" : rowData.active === 3 ? "Closed" : '' },
@@ -171,11 +198,6 @@ class UsersTable extends Component {
 								</Box>
 							</Box>
 							<Box mb={2} textAlign="center">
-								{/* <Tooltip title="Friends" placement="bottom">
-									<IconButton className="preview-icon-btn" variant="outlined" onClick={() => { this.props.getFriends(selectedRow.id); this.closePreview(); }}>
-										<i className="material-icons-outlined">nature_people</i>
-									</IconButton>
-								</Tooltip> */}
 								<Tooltip title="Edit" placement="bottom">
 									<IconButton className="preview-icon-btn" variant="outlined" onClick={() => this.props.onEdit(selectedRow.id)}>
 										<i className="material-icons">edit</i>

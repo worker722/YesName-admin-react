@@ -32,13 +32,19 @@ const styles = theme => ({
 class Dashboard extends Component {
 
 	componentDidMount() {
-		this.refresh();
-		setInterval(() => {
-			this.props.getUsers();
+		this.props.getUsers();
+		this.props.getStorageDetail();
+
+		this.getUserTimer = setInterval(() => {
+			if (window.location.href.includes("dashboard")) {
+				this.props.getUsers();
+				this.props.getStorageDetail();
+			}
 		}, 5000)
 	}
-	refresh() {
-		this.props.getStorageDetail();
+	componentWillUnmount() {
+		clearInterval(this.getUserTimer);
+		this.getUserTimer = null;
 	}
 	getProgressData() {
 		let { app: { storageInfo } } = this.props;
@@ -95,7 +101,7 @@ class Dashboard extends Component {
 		userService.clearStorage()
 			.then(res => {
 				NotificationManager.success(`${res.size} cleaned`);
-				this.refresh();
+				this.props.getStorageDetail();
 			})
 			.catch(err => {
 				NotificationManager.error("Something went wrong" + err);
